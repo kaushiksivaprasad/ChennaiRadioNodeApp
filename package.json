@@ -1,0 +1,44 @@
+{
+  "name": "ChennaiRadioNodeApp",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www",
+    "build": "babel src/ --out-dir=./bin/build/",
+    "watch": "babel --presets=es2015 src --watch --out-dir=./bin/build -s",
+    "debug": "DEBUG=ChennaiRadioNodeApp:server node ./bin/build/app"
+  },
+  "babel": {
+    "presets": [
+      "es2015"
+    ],
+    "sourceMaps": "inline"
+  },
+  "xo": {
+    "rules": {
+      "babel/new-cap": "warn",
+      "semi": "warn",
+      "no-unused-vars": "warn",
+      "no-prototype-builtins" : "warn"
+    }
+  },
+  "dependencies": {
+    "body-parser": "~1.15.1",
+    "debug": "~2.2.0",
+    "express": "~4.13.4",
+    "mongoose": "^4.5.6",
+    "morgan": "^1.7.0",
+    "multer": "^1.2.0",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
+    "serve-favicon": "~2.3.0",
+    "ws": "^1.1.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.11.4",
+    "babel-preset-es2015": "^6.9.0",
+    "bcrypt-nodejs": "0.0.3",
+    "source-map-support": "^0.4.2",
+    "xo": "^0.16.0"
+  }
+}
