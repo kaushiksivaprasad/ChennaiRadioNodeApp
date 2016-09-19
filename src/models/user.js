@@ -9,7 +9,7 @@ let userSchema = mongoose.Schema({
 		required: true
 	},
 	lastName: String,
-	phoneNo: Number,
+	phoneNo: String,
 	emailId: {
 		type: String,
 		required: true
@@ -41,7 +41,9 @@ userSchema.methods.validatePassword = function (password, cb) {
 userSchema.methods.isRJ = function () {
 	return this.userType === 'RJ';
 };
-
+userSchema.methods.isAdmin = function () {
+	return this.userType === 'Admin'
+}
 userSchema.pre('save', function (next) {
 	bcrypt.hash(this.password, null, null, (err, hash) => {
 		// Store hash in your password DB.

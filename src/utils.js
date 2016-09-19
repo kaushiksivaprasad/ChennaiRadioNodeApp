@@ -10,7 +10,7 @@ module.exports = (function () {
 
 		createDBConnection() {
 			return new Promise((resolve, reject) => {
-				mongoose.connect('mongodb://localhost:27017/test', {
+				mongoose.connect('mongodb://chennaiRadioUser:chennaiRadioNodeUser@localhost:27017/chennaiRadioDb', {
 					config: {
 						autoIndex: false
 					}

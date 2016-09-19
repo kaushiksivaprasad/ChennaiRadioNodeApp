@@ -1,5 +1,5 @@
 <script>
-    var ws = new WebSocket("ws://localhost:8080/57afad17c3be17c01b4bd76b/ws");
+    var ws = new WebSocket("ws://localhost:8080/57df1d7f93323570018b6ecf/ws");
 
     ws.onopen = function() {
         // Web Socket is connected, send data using send()
@@ -18,7 +18,7 @@
           document.body.appendChild(img);
           img.id = 'img1';
         }
-        img.src = mess[0].bufferUrl;
+        img.src = mess.mess[0].bufferUrl;
     };
 
     ws.onclose = function() {

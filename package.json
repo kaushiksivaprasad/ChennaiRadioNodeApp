@@ -19,13 +19,14 @@
       "babel/new-cap": "warn",
       "semi": "warn",
       "no-unused-vars": "warn",
-      "no-prototype-builtins" : "warn"
+      "no-prototype-builtins": "warn"
     }
   },
   "dependencies": {
     "body-parser": "~1.15.1",
     "debug": "~2.2.0",
     "express": "~4.13.4",
+    "moment": "^2.14.1",
     "mongoose": "^4.5.6",
     "morgan": "^1.7.0",
     "multer": "^1.2.0",

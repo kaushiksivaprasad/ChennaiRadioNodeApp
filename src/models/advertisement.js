@@ -34,16 +34,6 @@ advertismentSchema.post('save', function (doc) {
 		_id: doc.id
 	};
 	cache.addSingleAd(tempJson);
-	//
-	// Advertisement.ads.unshift(tempJson);
-	// let length = (Advertisement.ads.length < NO_OF_RECORDS) ? Advertisement.ads.length : NO_OF_RECORDS;
-	// Advertisement.ads = Advertisement.ads.slice(0, length);
-	// debug('advertisement.js -> Newly loaded ad' + doc.id);
-	// debug('advertisement.js -> Ads totl length' + Advertisement.ads.length);
-	// for (let ad of Advertisement.ads) {
-	// 	debug('advertisement.js -> Ads loaded : _id : ' + ad._id + ' url : ' + ad.url);
-	// }
-	// TODO: pass the doc to websocket
 });
 
 advertismentSchema.pre('save', function (next) {

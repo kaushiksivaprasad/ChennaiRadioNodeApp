@@ -1,0 +1,21 @@
+./mongod.exe scripts
+db.createUser({ user: "chennaiRadioAdmin",
+  pwd: "I'm invincible",
+  roles: [
+    { role: "dbAdminAnyDatabase", db: "admin" },
+	{ role : "readWriteAnyDatabase", db : "admin"},
+	{ role : "userAdminAnyDatabase", db : "admin"}
+  ]
+}
+);
+use chennaiRadioDb
+db.createUser({ user: "chennaiRadioUser",
+  pwd: "chennaiRadioNodeUser",
+  roles: [
+	{ role : "readWrite", db : "chennaiRadioDb"},
+  ]
+}
+);
+
+./mongo.exe
+./mongo.exe localhost:27017/chennaiRadioDb -u chennaiRadioAdmin -p "I'm invincible"

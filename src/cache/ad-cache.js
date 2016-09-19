@@ -40,7 +40,11 @@ class AdCache {
 				url: ad.url
 			});
 		}
-		return body;
+		let event = {
+			type: Config.ADS_EVENT,
+			mess: body
+		}
+		return event;
 	}
 
 	addListener(listener) {

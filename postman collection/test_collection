@@ -1,0 +1,148 @@
+{
+	"variables": [],
+	"info": {
+		"name": "ChennaiRadioTestCollections",
+		"_postman_id": "e8fec96c-357b-4909-72f7-b62b979a6202",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8080/signup",
+			"request": {
+				"url": "http://localhost:8080/signup",
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/signup",
+			"request": {
+				"url": "http://localhost:8080/signup",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"firstName\": \"kaushik\",\r\n\t\"lastName\": \"sivaprasad\",\r\n\t\"phoneNo\": 5144307630,\r\n\t\"emailId\": \"sa1@h.com\",\r\n\t\"password\": \"123\",\r\n\t\"userType\": \"User\"\r\n\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/login",
+			"request": {
+				"url": "http://localhost:8080/login",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\" : \"kaushik\"\r\n    \"lastName\" : \"sivaprasad\",\r\n    \"phoneNo\" : 5144307630,\r\n    \"emailId\" : \"k1@h.com\",\r\n    \"password\" : \"123\",\r\n    \"userType\" : \"User\"\r\n\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/login?email=sa1@h.com&password=1234",
+			"request": {
+				"url": "http://localhost:8080/login?email=sa1@h.com&password=1234",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/login?email=sa12@h.com&password=123",
+			"request": {
+				"url": "http://localhost:8080/login?email=sa12@h.com&password=123",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/login?email=rj@h.com&password=123",
+			"request": {
+				"url": "http://localhost:8080/login?email=rj@h.com&password=123",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/57afad17c3be17c01b4bd76b/advertisement",
+			"request": {
+				"url": "http://localhost:3000/57afad17c3be17c01b4bd76b/advertisement",
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "url",
+							"value": "http://test.com",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "img",
+							"value": "",
+							"type": "file",
+							"enabled": true
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/57afad17c3be17c01b4bd76b/refresh",
+			"request": {
+				"url": "http://localhost:3000/57afad17c3be17c01b4bd76b/refresh",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

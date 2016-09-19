@@ -1,4 +1,6 @@
 module.exports = {
 	NO_OF_ADS: 3,
-	TIMEOUT: 300000
+	TIMEOUT: 3000000,
+	SCHEDULE_EVENT: 'SCHEDULE',
+	ADS_EVENT: 'AD'
 }

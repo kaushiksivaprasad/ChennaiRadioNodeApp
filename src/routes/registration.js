@@ -37,11 +37,13 @@ router.post('/signup', bodyParser.json(), function (req, res, next) {
 	let user = new User(req.body);
 	user.save((err, user) => {
 		if (err) {
-			return next(err);
+			console.log('error occured in user creation');
+			next(err);
+		} else {
+			return res.status(201).json({
+				message: 'User created'
+			});
 		}
-		return res.status(201).json({
-			message: 'User created'
-		});
 	});
 });
 
