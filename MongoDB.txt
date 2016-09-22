@@ -19,3 +19,4 @@ db.createUser({ user: "chennaiRadioUser",
 
 ./mongo.exe
 ./mongo.exe localhost:27017/chennaiRadioDb -u chennaiRadioAdmin -p "I'm invincible"
+
