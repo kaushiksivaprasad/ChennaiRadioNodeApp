@@ -1,7 +1,6 @@
 require('source-map-support').install();
 let mongoose = require('mongoose');
 let debug = require('debug')('ChennaiRadioNodeApp:server');
-let cache = require('../cache/ad-cache.js')
 let Config = require('../config');
 
 // Constants:
@@ -27,21 +26,24 @@ let advertismentSchema = mongoose.Schema({
 advertismentSchema.index({
 	dateCreated: -1
 });
-advertismentSchema.post('save', function (doc) {
+advertismentSchema.methods.preProcessCreatedAd = function (doc) {
 	let tempJson = {
 		img: doc.img,
 		url: doc.url,
 		_id: doc.id
 	};
-	cache.addSingleAd(tempJson);
-});
+	return tempJson;
+	// return cache.addSingleAd(tempJson);
+};
 
 advertismentSchema.pre('save', function (next) {
 	this.dateCreated = Date.now();
 	next();
 });
-
-function loadAdsOnStartup() {
+advertismentSchema.statics.loadAdsOnStartup = function (cb) {
+	if (!cb) {
+		throw new Error('Callback is mandatory');
+	}
 	if (Advertisement) {
 		Advertisement.find({}).select({
 			img: 1,
@@ -51,7 +53,7 @@ function loadAdsOnStartup() {
 			dateCreated: -1
 		}).limit(NO_OF_RECORDS).exec((err, ads) => {
 			if (err) {
-				throw err;
+				return cb(err);
 			}
 			let adsToBePushedToCache = [];
 			for (let ad of ads) {
@@ -62,16 +64,17 @@ function loadAdsOnStartup() {
 				});
 				debug('advertisement.js -> Ads loaded : _id : ' + ad._id + ' url : ' + ad.url);
 			}
-			cache.setAds(adsToBePushedToCache);
+			return cb(null, adsToBePushedToCache);
+			// cache.setAds(adsToBePushedToCache);
 		});
 	}
-}
+};
 
 function createAdvertisementModelIfNotExist(connection) {
 	if (!Advertisement && connection) {
 		Advertisement = connection.model('advertisement', advertismentSchema);
 		Advertisement.ensureIndexes();
-		loadAdsOnStartup();
+		// loadAdsOnStartup();
 	}
 }
 module.exports = function (connection) {

@@ -1,64 +1,143 @@
 require('source-map-support').install();
 let mongoose = require('mongoose');
 var debug = require('debug')('ChennaiRadioNodeApp:server');
-let moment = require('moment');
+var moment = require('moment');
 
-let scheduleSchema = mongoose.Schema({
-	text: {
+var programSchema = new mongoose.Schema({
+	programId: {
+		type: mongoose.Schema.Types.ObjectId,
+		default: () => {
+			return new mongoose.Types.ObjectId();
+		},
+		required: true
+	},
+	artistImg: {
+		type: Buffer
+	},
+	programName: {
 		type: String,
-		minlength: 1
+		minlength: 1,
+		required: true
+	}, // based on gmt
+	startTimeInHour: {
+		type: Number,
+		min: 0,
+		max: 23,
+		required: true
+	},
+	// based on gmt
+	endTimeInHour: {
+		type: Number,
+		min: 0,
+		max: 23,
+		required: true
+	},
+	startTimeInMinutes: {
+		type: Number,
+		min: 0,
+		max: 59,
+		required: true
+	},
+	endTimeInMinutes: {
+		type: Number,
+		min: 0,
+		max: 59,
+		required: true
 	},
 	hostedBy: {
 		type: String,
 		minlength: 1
-	},
-	//  based on GMT
-	validTill: {
-		type: Date,
-		required: true
-	},
-	//  based on GMT
-	validFrom: {
-		type: Date,
-		required: true
+	}
+});
+
+let scheduleSchema = mongoose.Schema({
+	programs: [programSchema],
+	dayPlayed: {
+		type: Number,
+		enum: [0, 1, 2, 3, 4, 5, 6]
 	}
 });
 scheduleSchema.index({
-	validTill: 1,
-	validFrom: 1
+	dayPlayed: 1
 }, {
 	unique: true
 });
 
-scheduleSchema.statics.getSchedulesStartingFromCurrentTime = function (cb) {
-	debug('schedule.js -> getSchedulesStartingFromCurrentTime : ');
+scheduleSchema.statics.getSchedulesForTheNext24Hours = function (cb) {
+	debug('schedule.js -> getSchedulesForTheNext24Hours : ');
 	if (!cb) {
 		throw new Error('Callback is mandatory');
 	}
-	let currentUTCTime = moment.utc();
-	let tomsUTCTime = moment().utc().add(1, 'days');
-
+	let currentTime = moment.utc();
+	let tomTime = moment.utc().add(1, 'd');
+	let currentDay = currentTime.format('d');
+	let tomDay = currentTime.format('d');
 	this.find({
-		validFrom: {
-			$lte: tomsUTCTime.toDate()
-		},
-		validTill: {
-			$gte: currentUTCTime.toDate()
-		}
-	}, (err, docs) => {
+		$or: [{
+			'programs.endTimeInHour': {
+				$gt: currentTime.format('H')
+			},
+			'dayPlayed': currentDay
+		}, {
+			'programs.endTimeInHour': {
+				$eq: currentTime.format('H')
+			},
+			'programs.endTimeInMinutes': {
+				$gt: currentTime.format('m')
+			},
+			'dayPlayed': currentDay
+		}, {
+			'programs.startTimeInHour': {
+				$lt: tomTime.format('H')
+			},
+			'dayPlayed': tomDay
+		}, {
+			'programs.startTimeInHour': {
+				$eq: tomTime.format('H')
+			},
+			'programs.startTimeInMinutes': {
+				$lt: currentTime.format('m')
+			},
+			'dayPlayed': tomDay
+		}]
+	}).select({
+		'programs.artistImg': 0
+	}).sort({
+		'dayPlayed': 1,
+		'programs.startTimeInHour': 1,
+		'programs.startTimeInMinutes': 1
+	}).exec((err, docs) => {
 		if (err) {
 			return cb(err);
 		}
-		let schedules = [];
-		for (let doc of docs) {
-			let schedule = doc.toObject({
-				versionKey: false
-			});
-			delete schedule._id;
-			schedules.push(schedule);
-		}
+		let schedules = this.processSchedules(docs);
 		return cb(null, schedules);
 	});
+};
+
+scheduleSchema.statics.getImgBufferForId = function (id, cb) {
+	debug('schedule.js -> getImgBufferForId : ');
+	if (!cb) {
+		throw new Error('Callback is mandatory');
+	}
+	this.find({
+		'programs.id': id
+	}).select({
+		'programs.artistImg': 1
+	}).exec((err, img) => {
+		if (err) {
+			return cb(err);
+		}
+		return cb(null, img);
+	});
+};
+
+scheduleSchema.methods.processSchedule = function () {
+	let schedule = this.toObject({
+		versionKey: false
+			// delete schedule._id;
+	});
+	return schedule;
 };
 
 let Schedule = null;
@@ -74,6 +153,5 @@ module.exports = function (connection) {
 	if (!Schedule) {
 		throw new Error('Schedule Model not created');
 	}
-	debug('schedule.js -> schedule obj : ' + Schedule);
 	return Schedule;
 };

@@ -4,7 +4,7 @@ let WebSocketServer = require('ws').Server;
 let debug = require('debug')('ChennaiRadioNodeApp:server');
 let userSession = require('./session/usersession');
 let adCache = require('./cache/ad-cache');
-let scheduleCache = require('./cache/schedules-cache');
+// let scheduleCache = require('./cache/schedules-cache');
 let Config = require('./config.js');
 var Utils = require('./utils');
 
@@ -43,7 +43,7 @@ class WebSocket {
 		});
 		adCache.addListener(this);
 		userSession.addListener(this);
-		scheduleCache.addListener(this);
+		// scheduleCache.addListener(this);
 		debug('web-socket-server.js -> successfully created WebSocketServer');
 	}
 
@@ -64,16 +64,16 @@ class WebSocket {
 	processAndSendToClient(ws) {
 		for (let mess in this.lastMess) {
 			if (this.lastMess.hasOwnProperty(mess)) {
-				debug('web-socket-server.js -> processAndSendToClient : lastMess : ' + JSON.stringify(Object.create(this.lastMess[mess])));
+				debug('web-socket-server.js -> processAndSendToClient : lastMess : ' + JSON.stringify(this.lastMess[mess]));
 				let messToBeSent = Object.create(this.lastMess[mess]);
-				debug('web-socket-server.js -> messToBeSent : ' + JSON.stringify(messToBeSent));
-				if (messToBeSent && messToBeSent.mess.length > 0) {
+				if (this.lastMess[mess]) {
 					if (messToBeSent.type === Config.ADS_EVENT) {
 						messToBeSent.type = messToBeSent.type;
 						messToBeSent.mess = this.processAdMessage(messToBeSent.mess, ws.upgradeReq);
+						debug('web-socket-server.js -> messToBeSent : ' + JSON.stringify(messToBeSent));
 					} else {
 						messToBeSent.type = messToBeSent.type;
-						messToBeSent.mess = messToBeSent.mess
+						messToBeSent.mess = messToBeSent.mess;
 					}
 					ws.send(JSON.stringify(messToBeSent));
 				}

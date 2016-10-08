@@ -14,20 +14,29 @@ class ScheduleCache {
 	}
 
 	triggerListeners() {
-		debug('schedules-cache.js -> triggerListeners : length' + this.listeners.length)
-		if (this.listeners.length > 0) {
-			for (let listener of this.listeners) {
-				listener.sendToClient(this.getBodyForListeners());
-			}
-		}
+		// debug('schedules-cache.js -> triggerListeners : length' + this.listeners.length)
+		// if (this.listeners.length > 0) {
+		// 	for (let listener of this.listeners) {
+		// 		listener.sendToClient(this.getBodyForListeners());
+		// 	}
+		// }
 	}
 
 	getBodyForListeners() {
+		let mess = [];
 		let body = {
 			type: Config.SCHEDULE_EVENT,
 			mess: this.schedules
 		}
 		return body;
+	}
+
+	getImgBufferForId(id) {
+		for (let schedule of this.schedules) {
+			if (schedule._id === id) {
+				return schedule.artistImg;
+			}
+		}
 	}
 
 	addListener(listener) {

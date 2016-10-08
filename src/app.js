@@ -9,7 +9,7 @@ var LocalStrategy = require('passport-local').Strategy;
 var Utils = require('./utils.js');
 var wss = require('./web-socket-server');
 var userSession = require('./session/usersession');
-let scheduleCache = require('./cache/schedules-cache.js');
+let adCache = require('./cache/ad-cache.js');
 
 var app = express();
 var server = http.createServer();
@@ -24,7 +24,6 @@ app.use(logger('dev'));
 app.use(passport.initialize());
 
 app.use(function (req, res, next) {
-	debug('app.js -> setting Access-Control-Allow-Origin headers');
 	res.header('Access-Control-Allow-Origin', '*');
 	res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
 	next();
@@ -41,25 +40,24 @@ dbPromise.then(connection => {
 	Schedule = require('./models/schedule.js')(connection);
 	// Initiate web-socket-server
 	wss(server);
-	Schedule.getSchedulesStartingFromCurrentTime((err, docs) => {
+	Advertisement.loadAdsOnStartup((err, docs) => {
 		if (err) {
-			debug('app.js -> Some error occured in getting the schedules' + err);
+			debug('app.js -> Some error occured in getting the Advertisements' + err);
 		}
 		if (docs) {
-			debug('app.js -> schedules docs obtained' + docs.length);
-			scheduleCache.setSchedules(docs);
+			debug('app.js -> Advertisements docs obtained' + docs.length);
+			adCache.setAds(docs);
 		}
 	});
 	//	define routes
 	var registrationRoute = require('./routes/registration.js');
 	var adRoute = require('./routes/advertisement-route.js');
-	var rjRoute = require('./routes/rj.js');
 	var scheduleRoute = require('./routes/schedule-route.js');
 
 	// Declare routes
 	app.param('userId', function (req, res, next, id) {
 		let user = userSession.getUserSession(id);
-		debug('app.js -> User Retrived for id =' + id + ' is : ' + user);
+		debug('app.js -> User Retrived for id =' + id);
 		if (user === null || typeof user === 'undefined') {
 			let error = new Error('Invalid id or the user has timed out');
 			error.status = 404;
@@ -75,7 +73,6 @@ dbPromise.then(connection => {
 	});
 
 	app.use('/', registrationRoute);
-	app.use('/', rjRoute);
 	app.use('/', adRoute);
 	app.use('/', scheduleRoute);
 
@@ -86,6 +83,7 @@ dbPromise.then(connection => {
 				message: err.message,
 				error: err
 			});
+			debug('app.js -> common error function ' + err);
 		});
 	}
 

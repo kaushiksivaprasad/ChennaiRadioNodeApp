@@ -30,6 +30,25 @@ module.exports = (function () {
 			}
 			return 'http://' + req.headers.host + '/';
 		}
+
+		formatScheduleResponse(schedules) {
+			let response = [];
+			for (let schedule of schedules) {
+				schedule.programs = schedule.programs.map(item => {
+					return {
+						artistImgUrl: '/schedule/artistImg/' + item.programId,
+						programName: item.programName,
+						startTimeInHour: item.startTimeInHour,
+						endTimeInHour: item.endTimeInHour,
+						startTimeInMinutes: item.startTimeInMinutes,
+						endTimeInMinutes: item.endTimeInMinutes,
+						hostedBy: item.hostedBy
+					};
+				});
+				response.push(schedule);
+			}
+			return response;
+		}
 	}
 	return new Utils();
 })();

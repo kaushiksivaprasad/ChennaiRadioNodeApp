@@ -13,19 +13,25 @@ class UserSession {
 	}
 
 	setUserSession(user) {
-		user.cleanUserSessionOnTimeOut = () => {
-			if (user.timeout) {
-				clearTimeout(user.timeout);
-			}
-			user.timeout = setTimeout(() => {
-				this.removeUserSession(user._id);
-				clearTimeout(user.timeout);
-			}, timeout);
-		};
-		user.refreshUserSession = () => {
-			user.cleanUserSessionOnTimeOut();
-		};
-		this['session_' + user._id] = user;
+		let userFromSession = this.getUserSession(user._id);
+		if (userFromSession) {
+			user = userFromSession;
+			user.refreshUserSession();
+		} else {
+			user.cleanUserSessionOnTimeOut = () => {
+				if (user.timeout) {
+					clearTimeout(user.timeout);
+				}
+				user.timeout = setTimeout(() => {
+					this.removeUserSession(user._id);
+					clearTimeout(user.timeout);
+				}, timeout);
+			};
+			user.refreshUserSession = () => {
+				user.cleanUserSessionOnTimeOut();
+			};
+			this['session_' + user._id] = user;
+		}
 		return user._id;
 	}
 

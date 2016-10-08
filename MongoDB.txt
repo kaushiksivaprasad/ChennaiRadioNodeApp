@@ -18,5 +18,11 @@ db.createUser({ user: "chennaiRadioUser",
 );
 
 ./mongo.exe
+//admin
 ./mongo.exe localhost:27017/chennaiRadioDb -u chennaiRadioAdmin -p "I'm invincible"
 
+<<<<<<< HEAD
+=======
+//user
+./mongo.exe localhost:27017/chennaiRadioDb -u chennaiRadioUser -p "chennaiRadioNodeUser"
+>>>>>>> Refactored Schedule
