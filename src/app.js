@@ -29,7 +29,7 @@ app.use(function (req, res, next) {
 	next();
 });
 
-app.use('/:userId/public', express.static(path.join(__dirname, '..', '..', 'public')));
+app.use('/public', express.static(path.join(__dirname, '..', '..', 'public')));
 
 // Initiate DB
 let dbPromise = Utils.createDBConnection();
@@ -69,14 +69,14 @@ dbPromise.then(connection => {
 		}
 	});
 
-	app.all('/:userId/*', function (req, res, next) {
+	app.all('/rest/:userId/*', function (req, res, next) {
 		next();
 	});
 
-	app.use('/', registrationRoute);
-	app.use('/', adRoute);
-	app.use('/', scheduleRoute);
-	app.use('/', streamRoute);
+	app.use('/rest/', registrationRoute);
+	app.use('/rest/', adRoute);
+	app.use('/rest/', scheduleRoute);
+	app.use('/rest/', streamRoute);
 
 	if (app.get('env') === 'development') {
 		app.use(function (err, req, res, next) {
@@ -122,9 +122,12 @@ dbPromise.then(connection => {
 				if (res) {
 					return done(null, user);
 				}
-				return done(null, false, {
-					message: 'Incorrect password.'
-				});
+				console.log('app.js -> res' + res);
+				if (res !== null) {
+					return done(null, false, {
+						message: 'Incorrect password.'
+					});
+				}
 			});
 		});
 	}));

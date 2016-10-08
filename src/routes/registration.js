@@ -12,7 +12,7 @@ var Config = require('../config');
 let timeout = Config.TIMEOUT;
 
 var router = express.Router();
-router.get('/login', function (req, res, next) {
+router.post('/login', bodyParser.json(), function (req, res, next) {
 	passport.authenticate('local', function (err, user, info) {
 		if (err) {
 			return next(err);

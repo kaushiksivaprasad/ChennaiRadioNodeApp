@@ -28,7 +28,7 @@ module.exports = (function () {
 			if (!req) {
 				throw new Error('Req is a mandatory argument');
 			}
-			return 'http://' + req.headers.host + '/';
+			return 'http://' + req.headers.host + '/rest/';
 		}
 
 		formatScheduleResponse(schedules) {

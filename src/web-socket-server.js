@@ -20,8 +20,8 @@ class WebSocket {
 			verifyClient: function (info) {
 				let req = info.req;
 				let splitUrl = url.parse(req.url).pathname.split('/');
-				let user = userSession.getUserSession(splitUrl[1]);
-				if (user && splitUrl.length === 3 && splitUrl[2] === 'ws') {
+				let user = userSession.getUserSession(splitUrl[2]);
+				if (user && splitUrl.length === 4 && splitUrl[3] === 'ws' && splitUrl[1] === 'rest') {
 					info.req.user = user;
 					return true;
 				}
