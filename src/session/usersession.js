@@ -44,7 +44,7 @@ class UserSession {
 	triggerListeners(id) {
 		if (this.listeners.length > 0) {
 			for (let listener of this.listeners) {
-				listener.closeWsConnection(id);
+				listener.onUserRemoved(id);
 			}
 		}
 	}

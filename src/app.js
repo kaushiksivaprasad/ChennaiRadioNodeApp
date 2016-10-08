@@ -8,7 +8,7 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var Utils = require('./utils.js');
 var wss = require('./web-socket-server');
-var userSession = require('./session/usersession');
+var userSession = require('./session/usersession.js');
 let adCache = require('./cache/ad-cache.js');
 
 var app = express();
@@ -53,6 +53,7 @@ dbPromise.then(connection => {
 	var registrationRoute = require('./routes/registration.js');
 	var adRoute = require('./routes/advertisement-route.js');
 	var scheduleRoute = require('./routes/schedule-route.js');
+	let streamRoute = require('./routes/stream-route.js');
 
 	// Declare routes
 	app.param('userId', function (req, res, next, id) {
@@ -75,6 +76,7 @@ dbPromise.then(connection => {
 	app.use('/', registrationRoute);
 	app.use('/', adRoute);
 	app.use('/', scheduleRoute);
+	app.use('/', streamRoute);
 
 	if (app.get('env') === 'development') {
 		app.use(function (err, req, res, next) {

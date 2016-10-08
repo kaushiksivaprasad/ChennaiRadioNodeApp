@@ -104,12 +104,12 @@ class WebSocket {
 		return processedMess;
 	}
 
-	closeWsConnection(id) {
+	onUserRemoved(id) {
 		let connection = this.connections['connection_' + id];
 		if (connection) {
 			connection.close();
 			delete this.connections['connection_' + id];
-			debug('web-socket-server.js -> closeWsConnection : connection_' + id);
+			debug('web-socket-server.js -> onUserRemoved : connection_' + id);
 		}
 	}
 }

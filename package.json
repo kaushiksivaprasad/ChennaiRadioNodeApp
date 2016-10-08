@@ -26,6 +26,7 @@
     "body-parser": "~1.15.1",
     "debug": "~2.2.0",
     "express": "~4.13.4",
+    "icy": "^2.1.0",
     "moment": "^2.14.1",
     "mongoose": "^4.5.6",
     "morgan": "^1.7.0",
