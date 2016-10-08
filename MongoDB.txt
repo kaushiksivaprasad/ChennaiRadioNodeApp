@@ -12,7 +12,7 @@ use chennaiRadioDb
 db.createUser({ user: "chennaiRadioUser",
   pwd: "chennaiRadioNodeUser",
   roles: [
-	{ role : "readWrite", db : "chennaiRadioDb"},
+	{ role : "readWrite", db : "chennaiRadioDb"}
   ]
 }
 );
@@ -21,8 +21,6 @@ db.createUser({ user: "chennaiRadioUser",
 //admin
 ./mongo.exe localhost:27017/chennaiRadioDb -u chennaiRadioAdmin -p "I'm invincible"
 
-<<<<<<< HEAD
-=======
 //user
 ./mongo.exe localhost:27017/chennaiRadioDb -u chennaiRadioUser -p "chennaiRadioNodeUser"
->>>>>>> Refactored Schedule
+

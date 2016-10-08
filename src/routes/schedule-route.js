@@ -26,7 +26,6 @@ router.post('/:userId/schedule', upload.array('artistImgs'), function (req, res,
 	if (req.user.isAdmin()) {
 		req.user.refreshUserSession();
 		let temp = req.body;
-		debug('schedule-route.js -> posted schedule : ' + JSON.stringify(temp));
 		let schedule = new Schedule(temp);
 		schedule.save(err => {
 			if (err) {
@@ -45,7 +44,7 @@ router.post('/:userId/schedule', upload.array('artistImgs'), function (req, res,
 
 router.get('/:userId/schedule', function (req, res, next) {
 	req.user.refreshUserSession();
-	Schedule.getSchedules((err, docs) => {
+	Schedule.getSchedulesForTheNext24Hours((err, docs) => {
 		if (err) {
 			return next(err);
 		}
@@ -56,14 +55,16 @@ router.get('/:userId/schedule', function (req, res, next) {
 
 router.get('/:userId/schedule/artistImg/:id', function (req, res, next) {
 	req.user.refreshUserSession();
-	Schedule.getImgBufferForId((err, img) => {
+	Schedule.getImgBufferForId(req.params.id, (err, img) => {
 		if (err) {
 			return next(err);
 		}
-		res.writeHead(200, {
-			'Content-Type': 'image/jpeg'
-		});
-		res.end(img);
+		if (img) {
+			res.writeHead(200, {
+				'Content-Type': 'image/jpeg'
+			});
+			res.end(img);
+		}
 	});
 });
 

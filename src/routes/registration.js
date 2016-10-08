@@ -24,7 +24,6 @@ router.get('/login', function (req, res, next) {
 		res.status(200).json({
 			url: Utils.getBaseUrl(req) + id + '/refresh'
 		});
-		return user.cleanUserSessionOnTimeOut();
 	})(req, res, next);
 });
 

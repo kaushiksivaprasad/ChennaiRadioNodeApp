@@ -4,13 +4,6 @@ var debug = require('debug')('ChennaiRadioNodeApp:server');
 var moment = require('moment');
 
 var programSchema = new mongoose.Schema({
-	programId: {
-		type: mongoose.Schema.Types.ObjectId,
-		default: () => {
-			return new mongoose.Types.ObjectId();
-		},
-		required: true
-	},
 	artistImg: {
 		type: Buffer
 	},
@@ -63,6 +56,44 @@ scheduleSchema.index({
 	unique: true
 });
 
+/*
+db.schedules.find({
+		$or: [{
+			'programs.endTimeInHour': {
+				$gt: 13
+			},
+			'dayPlayed': 1
+		}, {
+			'programs.endTimeInHour': {
+				$eq: 13
+			},
+			'programs.endTimeInMinutes': {
+				$gt: 30
+			},
+			'dayPlayed': 1
+		}, {
+			'programs.startTimeInHour': {
+				$lt: 2
+			},
+			'dayPlayed': 2
+		}, {
+			'programs.startTimeInHour': {
+				$eq: 2
+			},
+			'programs.startTimeInMinutes': {
+				$lt: 30
+			},
+			'dayPlayed': 2
+		}]
+	},{'programs.artistImg': 0}).sort({
+		'dayPlayed': 1,
+		'programs.startTimeInHour': 1,
+		'programs.startTimeInMinutes': 1
+	}).pretty()
+
+	db.schedules.find({'programs' : {$elemMatch :{'hostedBy': {$eq: 'person1'}}},'dayPlayed': 1
+	},{'programs.artistImg': 0}).pretty();
+*/
 scheduleSchema.statics.getSchedulesForTheNext24Hours = function (cb) {
 	debug('schedule.js -> getSchedulesForTheNext24Hours : ');
 	if (!cb) {
@@ -71,45 +102,20 @@ scheduleSchema.statics.getSchedulesForTheNext24Hours = function (cb) {
 	let currentTime = moment.utc();
 	let tomTime = moment.utc().add(1, 'd');
 	let currentDay = currentTime.format('d');
-	let tomDay = currentTime.format('d');
+	let tomDay = tomTime.format('d');
 	this.find({
 		$or: [{
-			'programs.endTimeInHour': {
-				$gt: currentTime.format('H')
-			},
-			'dayPlayed': currentDay
+			dayPlayed: currentDay
 		}, {
-			'programs.endTimeInHour': {
-				$eq: currentTime.format('H')
-			},
-			'programs.endTimeInMinutes': {
-				$gt: currentTime.format('m')
-			},
-			'dayPlayed': currentDay
-		}, {
-			'programs.startTimeInHour': {
-				$lt: tomTime.format('H')
-			},
-			'dayPlayed': tomDay
-		}, {
-			'programs.startTimeInHour': {
-				$eq: tomTime.format('H')
-			},
-			'programs.startTimeInMinutes': {
-				$lt: currentTime.format('m')
-			},
-			'dayPlayed': tomDay
+			dayPlayed: tomDay
 		}]
 	}).select({
 		'programs.artistImg': 0
-	}).sort({
-		'dayPlayed': 1,
-		'programs.startTimeInHour': 1,
-		'programs.startTimeInMinutes': 1
 	}).exec((err, docs) => {
 		if (err) {
 			return cb(err);
 		}
+		debug('schedule.js -> docs' + JSON.stringify(docs));
 		let schedules = this.processSchedules(docs);
 		return cb(null, schedules);
 	});
@@ -121,23 +127,68 @@ scheduleSchema.statics.getImgBufferForId = function (id, cb) {
 		throw new Error('Callback is mandatory');
 	}
 	this.find({
-		'programs.id': id
+		'programs._id': id
 	}).select({
-		'programs.artistImg': 1
-	}).exec((err, img) => {
+		programs: 1
+	}).exec((err, docs) => {
 		if (err) {
 			return cb(err);
 		}
-		return cb(null, img);
+		for (let doc of docs) {
+			debug('schedule.js -> doc.dayPlayed' + doc.dayPlayed);
+			for (let program of doc.programs) {
+				debug('schedule.js -> program._id' + program._id);
+				if (program._id == id) {
+					return cb(null, program.artistImg);
+				}
+			}
+		}
+		return cb(new Error('Invalid imgId'));
 	});
 };
 
-scheduleSchema.methods.processSchedule = function () {
-	let schedule = this.toObject({
-		versionKey: false
-			// delete schedule._id;
-	});
-	return schedule;
+scheduleSchema.statics.processSchedules = function (docs) {
+	debug('schedule.js -> processSchedules : ');
+	let schedules = [];
+	let currentTime = moment.utc();
+	let tomTime = moment.utc().add(1, 'd');
+	let currentDay = currentTime.format('d');
+	let tomDay = tomTime.format('d');
+	let hour = currentTime.format('H');
+	let minutes = currentTime.format('m');
+
+	for (let doc of docs) {
+		let schedule = doc.toObject({
+			versionKey: false
+		});
+		if (schedule.dayPlayed == currentDay) {
+			debug('schedule.js -> inside currentDay match ');
+			for (let i = schedule.programs.length - 1; i >= 0; i--) {
+				debug('schedule.js -> iterating through programs ');
+				let program = schedule.programs[i];
+				if (program.endTimeInHour < hour ||
+					(program.endTimeInHour == hour && program.endTimeInMinutes <= minutes)) {
+					debug('schedule.js -> removing program ' + program.programName);
+					schedule.programs.splice(i, 1);
+					debug('schedule.js -> schedule.programs.length ' + schedule.programs.length)
+				}
+			}
+			schedules.unshift(schedule);
+		} else {
+			debug('schedule.js -> inside tomDay match ');
+			for (let i = schedule.programs.length - 1; i >= 0; i--) {
+				let program = schedule.programs[i];
+				if (program.startTimeInHour > hour ||
+					(program.startTimeInHour == hour && program.startTimeInMinutes >= minutes)) {
+					debug('schedule.js -> removing program ' + program.programName)
+					schedule.programs.splice(i, 1);
+					debug('schedule.js -> schedule.programs.length ' + schedule.programs.length)
+				}
+			}
+			schedules.push(schedule);
+		}
+	}
+	return schedules;
 };
 
 let Schedule = null;

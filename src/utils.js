@@ -36,7 +36,7 @@ module.exports = (function () {
 			for (let schedule of schedules) {
 				schedule.programs = schedule.programs.map(item => {
 					return {
-						artistImgUrl: '/schedule/artistImg/' + item.programId,
+						artistImgUrl: '/schedule/artistImg/' + item._id,
 						programName: item.programName,
 						startTimeInHour: item.startTimeInHour,
 						endTimeInHour: item.endTimeInHour,

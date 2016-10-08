@@ -62,9 +62,9 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:8080/login?email=sa1@h.com&password=1234",
+			"name": "admin login",
 			"request": {
-				"url": "http://localhost:8080/login?email=sa1@h.com&password=1234",
+				"url": "http://localhost:8080/login?email=admin@h.com&password=123",
 				"method": "GET",
 				"header": [],
 				"body": {
@@ -76,21 +76,7 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:8080/login?email=sa12@h.com&password=123",
-			"request": {
-				"url": "http://localhost:8080/login?email=sa12@h.com&password=123",
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "formdata",
-					"formdata": []
-				},
-				"description": ""
-			},
-			"response": []
-		},
-		{
-			"name": "http://localhost:8080/login?email=rj@h.com&password=123",
+			"name": "rj login",
 			"request": {
 				"url": "http://localhost:8080/login?email=rj@h.com&password=123",
 				"method": "GET",
@@ -104,9 +90,9 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:3000/57afad17c3be17c01b4bd76b/advertisement",
+			"name": "advertisement post",
 			"request": {
-				"url": "http://localhost:3000/57afad17c3be17c01b4bd76b/advertisement",
+				"url": "http://localhost:3000/57f04efe88aef5641f293d66/advertisement",
 				"method": "POST",
 				"header": [],
 				"body": {
@@ -131,7 +117,132 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:3000/57afad17c3be17c01b4bd76b/refresh",
+			"name": "schedule post",
+			"request": {
+				"url": "http://localhost:8080/57f04ee088aef5641f293d63/schedule",
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "programs[0][programName]",
+							"value": "program1",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[0][startTimeInHour]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[0][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[0][endTimeInHour]",
+							"value": "12",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[0][endTimeInMinutes]",
+							"value": "29",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[0][hostedBy]",
+							"value": "person1",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[1][programName]",
+							"value": "program2",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[1][startTimeInHour]",
+							"value": "12",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[1][startTimeInMinutes]",
+							"value": "30",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[1][endTimeInHour]",
+							"value": "23",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[1][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[1][hostedBy]",
+							"value": "person2",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "dayPlayed",
+							"value": "5",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "url[0][1]",
+							"value": "",
+							"type": "text",
+							"enabled": false
+						},
+						{
+							"key": "artistImgs",
+							"value": "images (1).png",
+							"type": "file",
+							"enabled": true
+						},
+						{
+							"key": "artistImgs",
+							"value": "images.png",
+							"type": "file",
+							"enabled": true
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "get schedule using rj login",
+			"request": {
+				"url": "http://localhost:8080/57f04efe88aef5641f293d66/schedule",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "refresh",
 			"request": {
 				"url": "http://localhost:3000/57afad17c3be17c01b4bd76b/refresh",
 				"method": "GET",
