@@ -6,6 +6,7 @@ let Config = require('./config');
 
 class StreamHandler {
 	constructor() {
+		this.lastSentData = null;
 		this.clients = {};
 		// URL to a known ICY stream
 		// var url = 'http://firewall.pulsradio.com';
@@ -18,6 +19,7 @@ class StreamHandler {
 			// 	console.error(parsed);
 			// });
 			res.on('data', data => {
+				this.lastSentData = data;
 				for (let property in this.clients) {
 					if (this.clients.hasOwnProperty(property)) {
 						let clientResponse = this.clients[property];
@@ -36,6 +38,13 @@ class StreamHandler {
 
 	addClient(userId, res) {
 		this.clients[userId] = res;
+		if (this.lastSentData) {
+			try {
+				res.write(this.lastSentData);
+			} catch (err) {
+				debug('stream-handler.js -> some error occured : ' + err);
+			}
+		}
 		debug('stream-handler.js  -> userId added to client list');
 	}
 
