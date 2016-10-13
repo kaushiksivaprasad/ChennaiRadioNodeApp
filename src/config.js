@@ -3,7 +3,7 @@ module.exports = {
 	TIMEOUT: 3000000,
 	SCHEDULE_EVENT: 'SCHEDULE',
 	ADS_EVENT: 'AD',
-	STREAM_URL: 'http://52.87.160.13:8000/stream',
+	STREAM_URL: 'http://localhost:8000/stream',
 	// ADS_TIMER: 300000
 	ADS_TIMER: 30000
 }
