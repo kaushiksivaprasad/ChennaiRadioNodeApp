@@ -20,8 +20,23 @@ class AdCache {
 	}
 
 	setAds(ads) {
-		this.ads = ads;
-		this.triggerListeners();
+		// TODO : temporary way of setting ad's
+		let triggerListeners = false;
+		if (this.ads.length < ads.length) {
+			this.ads = ads;
+			triggerListeners = true;
+		} else if (this.ads.length === ads.length) {
+			for (let i = 0; i < this.ads.length; i++) {
+				if (this.ads[i]._id !== ads[i]._id) {
+					this.ads = ads;
+					triggerListeners = true;
+					break;
+				}
+			}
+		}
+		if (triggerListeners) {
+			this.triggerListeners();
+		}
 	}
 
 	triggerListeners() {

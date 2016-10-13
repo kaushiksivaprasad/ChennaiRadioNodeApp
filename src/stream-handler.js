@@ -2,12 +2,15 @@ require('source-map-support').install();
 var icy = require('icy');
 var debug = require('debug')('ChennaiRadioNodeApp:server');
 let userSession = require('./session/usersession.js');
+let Config = require('./config');
 
 class StreamHandler {
 	constructor() {
 		this.clients = {};
 		// URL to a known ICY stream
-		var url = 'http://firewall.pulsradio.com';
+		// var url = 'http://firewall.pulsradio.com';
+		// var url = 'http://38.96.148.18:6150';
+		var url = Config.STREAM_URL;
 		// connect to the remote stream
 		icy.get(url, res => {
 			// res.on('metadata', function (metadata) {

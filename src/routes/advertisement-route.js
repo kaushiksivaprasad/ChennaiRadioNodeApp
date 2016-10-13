@@ -38,8 +38,9 @@ router.post('/:userId/advertisement', upload.single('img'), function (req, res, 
 			if (err) {
 				return next(err);
 			}
-			let json = ad.preProcessCreatedAd(ad);
-			cache.addSingleAd(json);
+			// TODO: Uncomment the following after the IPC is ready
+			// let json = ad.preProcessCreatedAd(ad);
+			// cache.addSingleAd(json);
 			return res.status(201).json({
 				message: 'Advertisement created'
 			});

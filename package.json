@@ -6,7 +6,7 @@
     "start": "node ./bin/www",
     "build": "babel src/ --out-dir=./bin/build/",
     "watch": "babel --presets=es2015 src --watch --out-dir=./bin/build -s",
-    "debug": "DEBUG=ChennaiRadioNodeApp:server node ./bin/build/app"
+    "debug": "DEBUG=ChennaiRadioNodeApp:server PORT=8081 node ./bin/build/app"
   },
   "babel": {
     "presets": [

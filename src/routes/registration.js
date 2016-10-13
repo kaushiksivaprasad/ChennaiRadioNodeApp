@@ -22,7 +22,8 @@ router.post('/login', bodyParser.json(), function (req, res, next) {
 		}
 		let id = userSession.setUserSession(user);
 		res.status(200).json({
-			url: Utils.getBaseUrl(req) + id + '/refresh'
+			// url: Utils.getBaseUrl(req) + id + '/refresh'
+			url: Utils.getBaseUrl(req) + id + '/'
 		});
 	})(req, res, next);
 });

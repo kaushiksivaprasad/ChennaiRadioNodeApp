@@ -10,10 +10,10 @@ var Utils = require('./utils.js');
 var wss = require('./web-socket-server');
 var userSession = require('./session/usersession.js');
 let adCache = require('./cache/ad-cache.js');
+let Config = require('./config');
 
 var app = express();
 var server = http.createServer();
-var port = 8080;
 
 // DB Models
 var User = null;
@@ -40,15 +40,23 @@ dbPromise.then(connection => {
 	Schedule = require('./models/schedule.js')(connection);
 	// Initiate web-socket-server
 	wss(server);
-	Advertisement.loadAdsOnStartup((err, docs) => {
-		if (err) {
-			debug('app.js -> Some error occured in getting the Advertisements' + err);
-		}
-		if (docs) {
-			debug('app.js -> Advertisements docs obtained' + docs.length);
-			adCache.setAds(docs);
-		}
-	});
+
+	// load ads function
+	function loadAdsWrapper() {
+		Advertisement.loadAdsOnStartup((err, docs) => {
+			if (err) {
+				debug('app.js -> Some error occured in getting the Advertisements' + err);
+			}
+			if (docs) {
+				debug('app.js -> Advertisements docs obtained' + docs.length);
+				adCache.setAds(docs);
+			}
+		});
+	}
+	loadAdsWrapper();
+	setInterval(function () {
+		loadAdsWrapper();
+	}, Config.ADS_TIMER);
 	//	define routes
 	var registrationRoute = require('./routes/registration.js');
 	var adRoute = require('./routes/advertisement-route.js');
@@ -136,6 +144,28 @@ dbPromise.then(connection => {
 	debug('app.js -> Some error occured in creating DB' + err);
 });
 
+function normalizePort(val) {
+	var port = parseInt(val, 10);
+
+	if (isNaN(port)) {
+		// named pipe
+		return val;
+	}
+
+	if (port >= 0) {
+		// port number
+		return port;
+	}
+
+	return false;
+}
+
+let port = normalizePort(process.env.PORT || '8080');
+if (!port) {
+	port = 8080;
+}
+debug('app.js -> app is running @ : ' + port)
+app.disable('etag');
 app.set('port', port);
 server.on('request', app);
 server.listen(port);

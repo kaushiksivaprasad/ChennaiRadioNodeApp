@@ -4,7 +4,7 @@ var debug = require('debug')('ChennaiRadioNodeApp:server');
 var streamHandler = require('../stream-handler.js');
 
 var router = express.Router();
-router.get('/:userId/stream', function (req, res, next) {
+router.get('/:userId/stream/*', function (req, res, next) {
 	req.user.refreshUserSession();
 	res.writeHead(200, {
 		'Content-Type': 'audio/mpeg',
