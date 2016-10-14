@@ -13,25 +13,37 @@ class StreamHandler {
 		// var url = 'http://38.96.148.18:6150';
 		var url = Config.STREAM_URL;
 		// connect to the remote stream
-		icy.get(url, res => {
-			// res.on('metadata', function (metadata) {
-			// 	var parsed = icy.parse(metadata);
-			// 	console.error(parsed);
-			// });
-			res.on('data', data => {
-				this.lastSentData = data;
-				for (let property in this.clients) {
-					if (this.clients.hasOwnProperty(property)) {
-						let clientResponse = this.clients[property];
-						try {
-							clientResponse.write(data);
-						} catch (err) {
-							debug('stream-handler.js -> some error occured : ' + err);
+		var getStreamData = () => {
+			icy.get(url, res => {
+				// res.on('metadata', function (metadata) {
+				// 	var parsed = icy.parse(metadata);
+				// 	console.error(parsed);
+				// });
+				res.on('data', data => {
+					this.lastSentData = data;
+					for (let property in this.clients) {
+						if (this.clients.hasOwnProperty(property)) {
+							let clientResponse = this.clients[property];
+							try {
+								clientResponse.write(data);
+							} catch (err) {
+								debug('stream-handler.js -> some error occured : ' + err);
+							}
 						}
 					}
-				}
+				});
+
+				res.on('end', data => {
+					debug('stream-handler.js -> end -> stream ended hence restarting: ');
+					return getStreamData();
+				});
+
+				res.on('finish', data => {
+					debug('stream-handler.js -> finish -> stream ended hence restarting: ');
+					return getStreamData();
+				});
 			});
-		});
+		}
 		userSession.addListener(this);
 		debug('stream-handler.js  -> loaded');
 	}
