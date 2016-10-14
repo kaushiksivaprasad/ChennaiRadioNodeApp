@@ -35,15 +35,17 @@ class StreamHandler {
 
 				res.on('end', data => {
 					debug('stream-handler.js -> end -> stream ended hence restarting: ');
-					return getStreamData();
-				});
-
-				res.on('finish', data => {
-					debug('stream-handler.js -> finish -> stream ended hence restarting: ');
-					return getStreamData();
+					return (() => {
+						let timer = setTimeout(() => {
+							clearTimeout(timer);
+							debug('stream-handler.js  -> in timer');
+							getStreamData();
+						}, 5000);
+					})();
 				});
 			});
 		}
+		getStreamData();
 		userSession.addListener(this);
 		debug('stream-handler.js  -> loaded');
 	}
