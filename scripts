@@ -1,7 +1,13 @@
 cd /usr/bin
 sudo mongod --dbpath ~/chennaiRadioDb/ --auth > ~/logs/mongodb.log 2>&1 &
 cd ChennaiRadioNodeApp/
-DEBUG=ChennaiRadioNodeApp:server PORT=8081 node ./bin/build/app > ~/logs/8081.log 2>&1 &
-DEBUG=ChennaiRadioNodeApp:server PORT=8082 node ./bin/build/app > ~/logs/8082.log 2>&1 &
-DEBUG=ChennaiRadioNodeApp:server PORT=8083 node ./bin/build/app > ~/logs/8083.log 2>&1 &
-DEBUG=ChennaiRadioNodeApp:server PORT=8084 node ./bin/build/app > ~/logs/8084.log 2>&1 &
+npm install forever -g
+DEBUG=ChennaiRadioNodeApp:server PORT=8081 forever start ./forever-config_8081.json
+DEBUG=ChennaiRadioNodeApp:server PORT=8082 forever start ./forever-config_8082.json
+DEBUG=ChennaiRadioNodeApp:server PORT=8083 forever start ./forever-config_8083.json
+DEBUG=ChennaiRadioNodeApp:server PORT=8084 forever start ./forever-config_8084.json
+
+#DEBUG=ChennaiRadioNodeApp:server PORT=8081 node ./bin/build/app > ~/logs/8081.log 2>&1 & echo $! >>~/logs/pid_history.log
+#DEBUG=ChennaiRadioNodeApp:server PORT=8082 node ./bin/build/app > ~/logs/8082.log 2>&1 & echo $! >>~/logs/pid_history.log
+#DEBUG=ChennaiRadioNodeApp:server PORT=8083 node ./bin/build/app > ~/logs/8083.log 2>&1 & echo $! >>~/logs/pid_history.log
+#DEBUG=ChennaiRadioNodeApp:server PORT=8084 node ./bin/build/app > ~/logs/8084.log 2>&1 & echo $! >>~/logs/pid_history.log

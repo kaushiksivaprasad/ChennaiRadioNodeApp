@@ -1,0 +1,9 @@
+{
+    "uid": "8084",
+    "append": true,
+    "script": "app.js",
+    "sourceDir": "/home/ubuntu/ChennaiRadioNodeApp/bin/build",
+    "OUTFILE" : "/home/ubuntu/logs/out_8084.log",
+    "ERRFILE" : "/home/ubuntu/logs/err_8084.log",
+    "LOGFILE" : "forever_8084.log"
+}
