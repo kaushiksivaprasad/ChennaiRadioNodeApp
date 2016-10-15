@@ -1,6 +1,6 @@
 module.exports = {
 	NO_OF_ADS: 3,
-	TIMEOUT: 3000000,
+	TIMEOUT: 1000 * 60 * 60 * 24,
 	SCHEDULE_EVENT: 'SCHEDULE',
 	ADS_EVENT: 'AD',
 	STREAM_URL: 'http://localhost:8000/stream',
