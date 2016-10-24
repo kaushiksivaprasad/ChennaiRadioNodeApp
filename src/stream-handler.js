@@ -9,9 +9,9 @@ class StreamHandler {
 		this.lastSentData = null;
 		this.clients = {};
 		// URL to a known ICY stream
-		// var url = 'http://firewall.pulsradio.com';
+		var url = 'http://firewall.pulsradio.com';
 		// var url = 'http://38.96.148.18:6150';
-		var url = Config.STREAM_URL;
+		// var url = Config.STREAM_URL;
 		// connect to the remote stream
 		var getStreamData = () => {
 			icy.get(url, res => {

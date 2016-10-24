@@ -7,6 +7,8 @@ DEBUG=ChennaiRadioNodeApp:server PORT=8082 forever start ./forever-config_8082.j
 DEBUG=ChennaiRadioNodeApp:server PORT=8083 forever start ./forever-config_8083.json
 DEBUG=ChennaiRadioNodeApp:server PORT=8084 forever start ./forever-config_8084.json
 
+mpstat #to get the cpu usage 
+
 #DEBUG=ChennaiRadioNodeApp:server PORT=8081 node ./bin/build/app > ~/logs/8081.log 2>&1 & echo $! >>~/logs/pid_history.log
 #DEBUG=ChennaiRadioNodeApp:server PORT=8082 node ./bin/build/app > ~/logs/8082.log 2>&1 & echo $! >>~/logs/pid_history.log
 #DEBUG=ChennaiRadioNodeApp:server PORT=8083 node ./bin/build/app > ~/logs/8083.log 2>&1 & echo $! >>~/logs/pid_history.log

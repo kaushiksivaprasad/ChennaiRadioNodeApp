@@ -73,6 +73,14 @@ advertismentSchema.statics.loadAdsOnStartup = function (cb) {
 function createAdvertisementModelIfNotExist(connection) {
 	if (!Advertisement && connection) {
 		Advertisement = connection.model('advertisement', advertismentSchema);
+		Advertisement.on('index', function (err) {
+			if (err) {
+				debug('advertisement.js -> Advertisement index error: %s', err);
+				throw err;
+			} else {
+				debug('advertisement.js -> Advertisement indexing complete');
+			}
+		});
 		Advertisement.ensureIndexes();
 		// loadAdsOnStartup();
 	}

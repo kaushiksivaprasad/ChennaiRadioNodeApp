@@ -47,7 +47,8 @@ let scheduleSchema = mongoose.Schema({
 	programs: [programSchema],
 	dayPlayed: {
 		type: Number,
-		enum: [0, 1, 2, 3, 4, 5, 6]
+		enum: [0, 1, 2, 3, 4, 5, 6],
+		required: true
 	}
 });
 scheduleSchema.index({
@@ -111,11 +112,15 @@ scheduleSchema.statics.getSchedulesForTheNext24Hours = function (cb) {
 		}]
 	}).select({
 		'programs.artistImg': 0
+	}).sort({
+		'dayPlayed': 1,
+		'programs.startTimeInHour': 1,
+		'programs.startTimeInMinutes': 1
 	}).exec((err, docs) => {
 		if (err) {
 			return cb(err);
 		}
-		debug('schedule.js -> docs' + JSON.stringify(docs));
+		// debug('schedule.js -> docs' + JSON.stringify(docs));
 		let schedules = this.processSchedules(docs);
 		return cb(null, schedules);
 	});
@@ -164,13 +169,13 @@ scheduleSchema.statics.processSchedules = function (docs) {
 		if (schedule.dayPlayed == currentDay) {
 			debug('schedule.js -> inside currentDay match ');
 			for (let i = schedule.programs.length - 1; i >= 0; i--) {
-				debug('schedule.js -> iterating through programs ');
+				// debug('schedule.js -> iterating through programs ');
 				let program = schedule.programs[i];
 				if (program.endTimeInHour < hour ||
 					(program.endTimeInHour == hour && program.endTimeInMinutes <= minutes)) {
 					debug('schedule.js -> removing program ' + program.programName);
 					schedule.programs.splice(i, 1);
-					debug('schedule.js -> schedule.programs.length ' + schedule.programs.length)
+					// debug('schedule.js -> schedule.programs.length ' + schedule.programs.length)
 				}
 			}
 			schedules.unshift(schedule);
@@ -182,7 +187,7 @@ scheduleSchema.statics.processSchedules = function (docs) {
 					(program.startTimeInHour == hour && program.startTimeInMinutes >= minutes)) {
 					debug('schedule.js -> removing program ' + program.programName)
 					schedule.programs.splice(i, 1);
-					debug('schedule.js -> schedule.programs.length ' + schedule.programs.length)
+					// debug('schedule.js -> schedule.programs.length ' + schedule.programs.length)
 				}
 			}
 			schedules.push(schedule);
@@ -196,6 +201,14 @@ let Schedule = null;
 function createScheduleModelIfNotExist(connection) {
 	if (!Schedule && connection) {
 		Schedule = connection.model('schedule', scheduleSchema);
+		Schedule.on('index', function (err) {
+			if (err) {
+				debug('schedule.js -> Schedule index error: %s', err);
+				throw err;
+			} else {
+				debug('schedule.js -> Schedule indexing complete');
+			}
+		});
 		Schedule.ensureIndexes();
 	}
 }

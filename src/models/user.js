@@ -59,13 +59,21 @@ let User = null;
 function createUserModelIfNotExist(connection) {
 	if (!User && connection) {
 		User = connection.model('user', userSchema);
+		User.on('index', function (err) {
+			if (err) {
+				debug('user.js -> User index error: %s', err);
+				throw err;
+			} else {
+				debug('user.js -> User indexing complete');
+			}
+		});
 		User.ensureIndexes();
 	}
 }
 module.exports = function (connection) {
 	createUserModelIfNotExist(connection);
 	if (!User) {
-		throw new Error('User Model not created');
+		throw new Error('user.js -> User Model not created');
 	}
 	return User;
 };
