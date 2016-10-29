@@ -34,11 +34,9 @@ class StreamHandler {
 				});
 
 				res.on('end', data => {
-					debug('stream-handler.js -> end -> stream ended hence restarting: ');
 					return (() => {
 						let timer = setTimeout(() => {
 							clearTimeout(timer);
-							debug('stream-handler.js  -> in timer');
 							getStreamData();
 						}, 5000);
 					})();

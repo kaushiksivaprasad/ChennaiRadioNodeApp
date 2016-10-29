@@ -29,7 +29,6 @@ class WebSocket {
 			}
 		});
 		this.wss.on('connection', ws => {
-			debug('web-socket-server.js -> 	this.connections : ' + this.connections);
 			this.connections['connection_' + ws.upgradeReq.user._id] = ws;
 			debug('web-socket-server.js -> connection recieved : connection_' + ws.upgradeReq.user._id);
 			this.processAndSendToClient(ws);
@@ -49,8 +48,8 @@ class WebSocket {
 
 	sendToClient(mess) {
 		if (mess) {
+			debug('web-socket-server.js -> sendToClients : ');
 			this.populateLastMess(mess);
-			debug('web-socket-server.js -> sendToClients : ' + JSON.stringify(this.lastMess));
 			for (let property in this.connections) {
 				if (this.connections.hasOwnProperty(property)) {
 					let ws = this.connections[property];
@@ -62,15 +61,14 @@ class WebSocket {
 	}
 
 	processAndSendToClient(ws) {
+		debug('web-socket-server.js ->  processAndSendToClient : ');
 		for (let mess in this.lastMess) {
 			if (this.lastMess.hasOwnProperty(mess)) {
-				debug('web-socket-server.js -> processAndSendToClient : lastMess : ' + JSON.stringify(this.lastMess[mess]));
 				let messToBeSent = Object.create(this.lastMess[mess]);
 				if (this.lastMess[mess]) {
 					if (messToBeSent.type === Config.ADS_EVENT) {
 						messToBeSent.type = messToBeSent.type;
 						messToBeSent.mess = this.processAdMessage(messToBeSent.mess, ws.upgradeReq);
-						debug('web-socket-server.js -> messToBeSent : ' + JSON.stringify(messToBeSent));
 					} else {
 						messToBeSent.type = messToBeSent.type;
 						messToBeSent.mess = messToBeSent.mess;
@@ -83,7 +81,7 @@ class WebSocket {
 
 	populateLastMess(mess) {
 		if (mess) {
-			debug('web-socket-server.js ->  populateLastMess : ' + JSON.stringify(mess));
+			debug('web-socket-server.js ->  populateLastMess : ');
 			if (mess.type === Config.ADS_EVENT) {
 				this.lastMess.adMessage = mess;
 			} else if (mess.type === Config.SCHEDULE_EVENT) {

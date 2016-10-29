@@ -140,9 +140,7 @@ scheduleSchema.statics.getImgBufferForId = function (id, cb) {
 			return cb(err);
 		}
 		for (let doc of docs) {
-			debug('schedule.js -> doc.dayPlayed' + doc.dayPlayed);
 			for (let program of doc.programs) {
-				debug('schedule.js -> program._id' + program._id);
 				if (program._id == id) {
 					return cb(null, program.artistImg);
 				}

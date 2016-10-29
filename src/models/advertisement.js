@@ -45,6 +45,7 @@ advertismentSchema.statics.loadAdsOnStartup = function (cb) {
 		throw new Error('Callback is mandatory');
 	}
 	if (Advertisement) {
+		debug('advertisement.js -> loadAdsOnStartup : ');
 		Advertisement.find({}).select({
 			img: 1,
 			url: 1,
@@ -62,7 +63,6 @@ advertismentSchema.statics.loadAdsOnStartup = function (cb) {
 					url: ad.url,
 					_id: ad.id
 				});
-				debug('advertisement.js -> Ads loaded : _id : ' + ad._id + ' url : ' + ad.url);
 			}
 			return cb(null, adsToBePushedToCache);
 			// cache.setAds(adsToBePushedToCache);
