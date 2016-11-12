@@ -176,7 +176,9 @@ scheduleSchema.statics.processSchedules = function (docs) {
 					// debug('schedule.js -> schedule.programs.length ' + schedule.programs.length)
 				}
 			}
-			schedules.unshift(schedule);
+			if (schedule.programs.length > 0) {
+				schedules.unshift(schedule);
+			}
 		} else {
 			debug('schedule.js -> inside tomDay match ');
 			for (let i = schedule.programs.length - 1; i >= 0; i--) {
