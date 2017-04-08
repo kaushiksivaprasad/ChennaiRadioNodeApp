@@ -10,21 +10,18 @@
 		{
 			"name": "http://localhost:8080/signup",
 			"request": {
-				"url": "http://localhost:8080/signup",
+				"url": "http://localhost:8080/rest/signup",
 				"method": "POST",
 				"header": [],
-				"body": {
-					"mode": "formdata",
-					"formdata": []
-				},
+				"body": {},
 				"description": ""
 			},
 			"response": []
 		},
 		{
-			"name": "http://localhost:8080/signup",
+			"name": "admin signup",
 			"request": {
-				"url": "http://localhost:8080/signup",
+				"url": "http://api.chennairadio.ca/rest/signup",
 				"method": "POST",
 				"header": [
 					{
@@ -35,7 +32,47 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n\t\"firstName\": \"kaushik\",\r\n\t\"lastName\": \"sivaprasad\",\r\n\t\"phoneNo\": 5144307630,\r\n\t\"emailId\": \"sa1@h.com\",\r\n\t\"password\": \"123\",\r\n\t\"userType\": \"User\"\r\n\r\n}"
+					"raw": "{\r\n\t\"firstName\": \"admin\",\r\n\t\"lastName\": \"admin\",\r\n\t\"phoneNo\": 5144307630,\r\n\t\"emailId\": \"admin@h.com\",\r\n\t\"password\": \"123\",\r\n\t\"userType\": \"Admin\"\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "rj signup",
+			"request": {
+				"url": "http://api.chennairadio.ca/rest/signup",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"firstName\": \"rj\",\r\n\t\"lastName\": \"rj\",\r\n\t\"phoneNo\": 5144307630,\r\n\t\"emailId\": \"rj@h.com\",\r\n\t\"password\": \"123\",\r\n\t\"userType\": \"RJ\"\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "user signup",
+			"request": {
+				"url": "http://52.87.160.13/rest/signup",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"firstName\": \"kaushik\",\r\n\t\"lastName\": \"sivaprasad\",\r\n\t\"phoneNo\": 5144307630,\r\n\t\"emailId\": \"user@h.com\",\r\n\t\"password\": \"123\",\r\n\t\"userType\": \"User\"\r\n\r\n}"
 				},
 				"description": ""
 			},
@@ -44,7 +81,7 @@
 		{
 			"name": "http://localhost:8080/login",
 			"request": {
-				"url": "http://localhost:8080/login",
+				"url": "http://localhost:8080/rest/login",
 				"method": "GET",
 				"header": [
 					{
@@ -64,12 +101,18 @@
 		{
 			"name": "admin login",
 			"request": {
-				"url": "http://localhost:8080/login?email=admin@h.com&password=123",
-				"method": "GET",
-				"header": [],
+				"url": "http://api.chennairadio.ca/rest/login",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
 				"body": {
-					"mode": "formdata",
-					"formdata": []
+					"mode": "raw",
+					"raw": "{\n\t\"email\" : \"admin@h.com\",\n\t\"password\": \"123\"\n}"
 				},
 				"description": ""
 			},
@@ -78,12 +121,18 @@
 		{
 			"name": "rj login",
 			"request": {
-				"url": "http://localhost:8080/login?email=rj@h.com&password=123",
-				"method": "GET",
-				"header": [],
+				"url": "http://api.chennairadio.ca/rest/login",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
 				"body": {
-					"mode": "formdata",
-					"formdata": []
+					"mode": "raw",
+					"raw": "{\n\t\"email\" : \"rj@h.com\",\n\t\"password\": \"123\"\n}"
 				},
 				"description": ""
 			},
@@ -92,7 +141,7 @@
 		{
 			"name": "advertisement post",
 			"request": {
-				"url": "http://localhost:3000/57f04efe88aef5641f293d66/advertisement",
+				"url": "http://api.chennairadio.ca/rest/581423520215c34044e81f87/advertisement",
 				"method": "POST",
 				"header": [],
 				"body": {
@@ -102,13 +151,13 @@
 							"key": "url",
 							"value": "http://test.com",
 							"type": "text",
-							"enabled": true
+							"enabled": false
 						},
 						{
 							"key": "img",
-							"value": "",
 							"type": "file",
-							"enabled": true
+							"enabled": true,
+							"src": "ad1-min.jpg"
 						}
 					]
 				},
@@ -119,7 +168,7 @@
 		{
 			"name": "schedule post",
 			"request": {
-				"url": "http://localhost:8080/57f04ee088aef5641f293d63/schedule",
+				"url": "http://52.87.160.13/rest/57fff212d3b2922154d3a9a5/schedule",
 				"method": "POST",
 				"header": [],
 				"body": {
@@ -127,7 +176,7 @@
 					"formdata": [
 						{
 							"key": "programs[0][programName]",
-							"value": "program1",
+							"value": "Chennai Melodies",
 							"type": "text",
 							"enabled": true
 						},
@@ -145,43 +194,428 @@
 						},
 						{
 							"key": "programs[0][endTimeInHour]",
-							"value": "12",
+							"value": "1",
 							"type": "text",
 							"enabled": true
 						},
 						{
 							"key": "programs[0][endTimeInMinutes]",
-							"value": "29",
+							"value": "0",
 							"type": "text",
 							"enabled": true
 						},
 						{
 							"key": "programs[0][hostedBy]",
-							"value": "person1",
+							"value": "RJ Divya",
 							"type": "text",
 							"enabled": true
 						},
 						{
 							"key": "programs[1][programName]",
-							"value": "program2",
+							"value": "Back to Back Songs",
 							"type": "text",
 							"enabled": true
 						},
 						{
 							"key": "programs[1][startTimeInHour]",
-							"value": "12",
+							"value": "1",
 							"type": "text",
 							"enabled": true
 						},
 						{
 							"key": "programs[1][startTimeInMinutes]",
-							"value": "30",
+							"value": "1",
 							"type": "text",
 							"enabled": true
 						},
 						{
 							"key": "programs[1][endTimeInHour]",
+							"value": "9",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[1][endTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[1][hostedBy]",
+							"value": "Chennai Radio",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[2][programName]",
+							"value": "Just Music",
+							"type": "text",
+							"enabled": false
+						},
+						{
+							"key": "programs[2][startTimeInHour]",
+							"value": "4",
+							"type": "text",
+							"enabled": false
+						},
+						{
+							"key": "programs[2][startTimeInMinutes]",
+							"value": "1",
+							"type": "text",
+							"enabled": false
+						},
+						{
+							"key": "programs[2][endTimeInHour]",
+							"value": "9",
+							"type": "text",
+							"enabled": false
+						},
+						{
+							"key": "programs[2][endTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": false
+						},
+						{
+							"key": "programs[2][hostedBy]",
+							"value": "Chennai Radio",
+							"type": "text",
+							"enabled": false
+						},
+						{
+							"key": "programs[2][programName]",
+							"value": "Bakthi Maalai",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[2][startTimeInHour]",
+							"value": "9",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[2][startTimeInMinutes]",
+							"value": "1",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[2][endTimeInHour]",
+							"value": "11",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[2][endTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[2][hostedBy]",
+							"value": "RJ Suji",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[3][programName]",
+							"value": "Vanakkam Thamizha",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[3][startTimeInHour]",
+							"value": "11",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[3][startTimeInMinutes]",
+							"value": "1",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[3][endTimeInHour]",
+							"value": "15",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[3][endTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[3][hostedBy]",
+							"value": "RJ Gowtham",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[4][programName]",
+							"value": "Chennai Music Express",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[4][startTimeInHour]",
+							"value": "15",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[4][startTimeInMinutes]",
+							"value": "1",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[4][endTimeInHour]",
+							"value": "18",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[4][endTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[4][hostedBy]",
+							"value": "Chennai Radio",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[5][programName]",
+							"value": "Interval",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[5][startTimeInHour]",
+							"value": "18",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[5][startTimeInMinutes]",
+							"value": "1",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[5][endTimeInHour]",
+							"value": "21",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[5][endTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[5][hostedBy]",
+							"value": "RJ Nivi",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[6][programName]",
+							"value": "Kanna Pinna With Munna",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[6][startTimeInHour]",
+							"value": "21",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[6][startTimeInMinutes]",
+							"value": "1",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[6][endTimeInHour]",
 							"value": "23",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[6][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[6][hostedBy]",
+							"value": "RJ Munna",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "dayPlayed",
+							"value": "1",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "url[0][1]",
+							"value": "",
+							"type": "text",
+							"enabled": false
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "R_Divya.png"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "ChennaiRadio.png"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "Rj_suji.png"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "Rj_Gowtham.png"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "ChennaiRadio.png"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "Rj_Nivi.png"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "Rj_Munna.png"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": false,
+							"src": "Rj_Munna.png"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "get schedule using rj login",
+			"request": {
+				"url": "http://52.87.160.13/rest/57fff1f5d3b2922154d3a9a4/schedule",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "refresh",
+			"request": {
+				"url": "http://localhost:8080/rest/57afad17c3be17c01b4bd76b/refresh",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Weekday Schedule",
+			"request": {
+				"url": "http://api.chennairadio.ca/rest/5813e1171818203b6b163374/schedule",
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "programs[0][programName]",
+							"value": "Kanna Pinna With Munna",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[0][startTimeInHour]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[0][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[0][endTimeInHour]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[0][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[0][hostedBy]",
+							"value": "RJ Munna",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[1][programName]",
+							"value": "Raja Raja dhan",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[1][startTimeInHour]",
+							"value": "1",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[1][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[1][endTimeInHour]",
+							"value": "3",
 							"type": "text",
 							"enabled": true
 						},
@@ -193,7 +627,223 @@
 						},
 						{
 							"key": "programs[1][hostedBy]",
-							"value": "person2",
+							"value": "RJ Raja",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[2][programName]",
+							"value": "Music Express",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[2][startTimeInHour]",
+							"value": "4",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[2][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[2][endTimeInHour]",
+							"value": "8",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[2][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[2][hostedBy]",
+							"value": "Chennai Radio",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[3][programName]",
+							"value": "Recharge Raaga",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[3][startTimeInHour]",
+							"value": "9",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[3][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[3][endTimeInHour]",
+							"value": "10",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[3][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[3][hostedBy]",
+							"value": "RJ Suji",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[4][programName]",
+							"value": "7/11",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[4][startTimeInHour]",
+							"value": "11",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[4][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[4][endTimeInHour]",
+							"value": "14",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[4][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[4][hostedBy]",
+							"value": "S/o Dhavamani ",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[5][programName]",
+							"value": "Noisebook",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[5][startTimeInHour]",
+							"value": "15",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[5][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[5][endTimeInHour]",
+							"value": "17",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[5][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[5][hostedBy]",
+							"value": "RJ Nivi",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[6][programName]",
+							"value": "Juke Box",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[6][startTimeInHour]",
+							"value": "18",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[6][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[6][endTimeInHour]",
+							"value": "20",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[6][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[6][hostedBy]",
+							"value": "Chennai Radio",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[7][programName]",
+							"value": "Kanna Pinna With Munna",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[7][startTimeInHour]",
+							"value": "21",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[7][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[7][endTimeInHour]",
+							"value": "23",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[7][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[7][hostedBy]",
+							"value": "RJ Munna",
 							"type": "text",
 							"enabled": true
 						},
@@ -211,15 +861,57 @@
 						},
 						{
 							"key": "artistImgs",
-							"value": "images (1).png",
 							"type": "file",
-							"enabled": true
+							"enabled": true,
+							"src": "Rj_Munna.png"
 						},
 						{
 							"key": "artistImgs",
-							"value": "images.png",
 							"type": "file",
-							"enabled": true
+							"enabled": true,
+							"src": "RJ Abi.png"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "music_cover_art.png"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "Rj_suji.png"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "Rj_Gowtham.png"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "rj_nivi.jpg"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "music_cover_art.png"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "Rj_Munna.png"
+						},
+						{
+							"key": "",
+							"value": "",
+							"type": "text",
+							"enabled": false
 						}
 					]
 				},
@@ -228,28 +920,4129 @@
 			"response": []
 		},
 		{
-			"name": "get schedule using rj login",
+			"name": "saturday schedule",
 			"request": {
-				"url": "http://localhost:8080/57f04efe88aef5641f293d66/schedule",
-				"method": "GET",
+				"url": "http://api.chennairadio.ca/rest/5813e1171818203b6b163374/schedule",
+				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "formdata",
-					"formdata": []
+					"formdata": [
+						{
+							"key": "programs[0][programName]",
+							"value": "Kanna Pinna With Munna",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[0][startTimeInHour]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[0][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[0][endTimeInHour]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[0][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[0][hostedBy]",
+							"value": "RJ Munna",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[1][programName]",
+							"value": "Raja Raja dhan",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[1][startTimeInHour]",
+							"value": "1",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[1][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[1][endTimeInHour]",
+							"value": "3",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[1][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[1][hostedBy]",
+							"value": "RJ Raja",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[2][programName]",
+							"value": "Music Express",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[2][startTimeInHour]",
+							"value": "4",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[2][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[2][endTimeInHour]",
+							"value": "8",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[2][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[2][hostedBy]",
+							"value": "Chennai Radio",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[3][programName]",
+							"value": "Recharge Raaga",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[3][startTimeInHour]",
+							"value": "9",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[3][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[3][endTimeInHour]",
+							"value": "10",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[3][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[3][hostedBy]",
+							"value": "RJ Suji",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[4][programName]",
+							"value": "Music Express",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[4][startTimeInHour]",
+							"value": "11",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[4][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[4][endTimeInHour]",
+							"value": "14",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[4][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[4][hostedBy]",
+							"value": "Chennai Radio",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[5][programName]",
+							"value": "Whatsapp Wishes",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[5][startTimeInHour]",
+							"value": "15",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[5][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[5][endTimeInHour]",
+							"value": "16",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[5][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[5][hostedBy]",
+							"value": "Chennai Radio",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[6][programName]",
+							"value": "Lunch break",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[6][startTimeInHour]",
+							"value": "17",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[6][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[6][endTimeInHour]",
+							"value": "18",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[6][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[6][hostedBy]",
+							"value": "RJ Abhi",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[7][programName]",
+							"value": "Mangaatha",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[7][startTimeInHour]",
+							"value": "19",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[7][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[7][endTimeInHour]",
+							"value": "20",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[7][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[7][hostedBy]",
+							"value": "Rj Harish",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[8][programName]",
+							"value": "Weekend Galatta",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[8][startTimeInHour]",
+							"value": "21",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[8][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[8][endTimeInHour]",
+							"value": "22",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[8][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[8][hostedBy]",
+							"value": "Rj Divya & Rj Harish",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[9][programName]",
+							"value": "Autograph",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[9][startTimeInHour]",
+							"value": "23",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[9][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[9][endTimeInHour]",
+							"value": "23",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[9][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[9][hostedBy]",
+							"value": "Chennai Radio",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "dayPlayed",
+							"value": "6",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "url[0][1]",
+							"value": "",
+							"type": "text",
+							"enabled": false
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "Rj_Munna.png"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "RJ Abi.png"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "music_cover_art.png"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "Rj_suji.png"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "music_cover_art.png"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "music_cover_art.png"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "rj_abi.jpg"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "Rj_Harrish.png"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "music_cover_art.png"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "music_cover_art.png"
+						}
+					]
 				},
 				"description": ""
 			},
 			"response": []
 		},
 		{
-			"name": "refresh",
+			"name": "Monday Schedule",
 			"request": {
-				"url": "http://localhost:3000/57afad17c3be17c01b4bd76b/refresh",
-				"method": "GET",
+				"url": "http://api.chennairadio.ca/rest/5813e1171818203b6b163374/schedule",
+				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "formdata",
-					"formdata": []
+					"formdata": [
+						{
+							"key": "programs[0][programName]",
+							"value": "Chennai Melodies",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[0][startTimeInHour]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[0][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[0][endTimeInHour]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[0][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[0][hostedBy]",
+							"value": "RJ Divya",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[1][programName]",
+							"value": "Music Express",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[1][startTimeInHour]",
+							"value": "1",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[1][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[1][endTimeInHour]",
+							"value": "8",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[1][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[1][hostedBy]",
+							"value": "Chennai Radio",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[2][programName]",
+							"value": "Recharge Raaga",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[2][startTimeInHour]",
+							"value": "9",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[2][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[2][endTimeInHour]",
+							"value": "10",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[2][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[2][hostedBy]",
+							"value": "RJ Suji",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[3][programName]",
+							"value": "7/11",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[3][startTimeInHour]",
+							"value": "11",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[3][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[3][endTimeInHour]",
+							"value": "14",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[3][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[3][hostedBy]",
+							"value": "S/o Dhavamani",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[4][programName]",
+							"value": "Noisebook",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[4][startTimeInHour]",
+							"value": "15",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[4][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[4][endTimeInHour]",
+							"value": "17",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[4][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[4][hostedBy]",
+							"value": "RJ Nivi",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[5][programName]",
+							"value": "Juke Box",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[5][startTimeInHour]",
+							"value": "18",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[5][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[5][endTimeInHour]",
+							"value": "20",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[5][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[5][hostedBy]",
+							"value": "Chennai Radio",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[6][programName]",
+							"value": "Kanna Pinna With Munna",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[6][startTimeInHour]",
+							"value": "21",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[6][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[6][endTimeInHour]",
+							"value": "23",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[6][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[6][hostedBy]",
+							"value": "RJ Munna",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "dayPlayed",
+							"value": "1",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "url[0][1]",
+							"value": "",
+							"type": "text",
+							"enabled": false
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "R_Divya.png"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "music_cover_art.png"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "Rj_suji.png"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "Rj_Gowtham.png"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "rj_nivi.jpg"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "music_cover_art.png"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "Rj_Munna.png"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Monday- day light saving time",
+			"request": {
+				"url": "http://api.chennairadio.ca/rest/5813e1171818203b6b163374/schedule",
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "programs[0][programName]",
+							"value": "Music Express",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[0][startTimeInHour]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[0][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[0][endTimeInHour]",
+							"value": "10",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[0][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[0][hostedBy]",
+							"value": "Chennai Radio",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[1][programName]",
+							"value": "Recharge Raaga",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[1][startTimeInHour]",
+							"value": "11",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[1][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[1][endTimeInHour]",
+							"value": "11",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[1][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[1][hostedBy]",
+							"value": "Chennai Radio",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[2][programName]",
+							"value": "Music Express",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[2][startTimeInHour]",
+							"value": "12",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[2][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[2][endTimeInHour]",
+							"value": "14",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[2][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[2][hostedBy]",
+							"value": "Chennai Radio",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[3][programName]",
+							"value": "Share Auto",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[3][startTimeInHour]",
+							"value": "15",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[3][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[3][endTimeInHour]",
+							"value": "15",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[3][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[3][hostedBy]",
+							"value": "RJ Angayarkanni",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[4][programName]",
+							"value": "Noisebook",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[4][startTimeInHour]",
+							"value": "16",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[4][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[4][endTimeInHour]",
+							"value": "18",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[4][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[4][hostedBy]",
+							"value": "RJ Divya",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[5][programName]",
+							"value": "Tentkottai",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[5][startTimeInHour]",
+							"value": "19",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[5][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[5][endTimeInHour]",
+							"value": "21",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[5][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[5][hostedBy]",
+							"value": "Chennai Radio",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[6][programName]",
+							"value": "Reeltime",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[6][startTimeInHour]",
+							"value": "22",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[6][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[6][endTimeInHour]",
+							"value": "22",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[6][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[6][hostedBy]",
+							"value": "Chennai Radio",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[7][programName]",
+							"value": "Share Auto",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[7][startTimeInHour]",
+							"value": "23",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[7][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[7][endTimeInHour]",
+							"value": "23",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[7][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[7][hostedBy]",
+							"value": "RJ Angayarkanni",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "dayPlayed",
+							"value": "1",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "url[0][1]",
+							"value": "",
+							"type": "text",
+							"enabled": false
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"warning": "",
+							"src": "music_cover_art.png"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"warning": "",
+							"src": "music_cover_art.png"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"warning": "",
+							"src": "music_cover_art.png"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"warning": "",
+							"src": "Angayarkani-min (1).jpeg"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"warning": "",
+							"src": "rj_dhivya.jpg"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"warning": "",
+							"src": "music_cover_art.png"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"warning": "",
+							"src": "music_cover_art.png"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "Angayarkani-min (1).jpeg"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Tuesday- day light saving time",
+			"request": {
+				"url": "http://api.chennairadio.ca/rest/5813e1171818203b6b163374/schedule",
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "programs[0][programName]",
+							"value": "Vettaiyadu Vilayadu",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[0][startTimeInHour]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[0][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[0][endTimeInHour]",
+							"value": "1",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[0][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[0][hostedBy]",
+							"value": "Rj Ravi",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[1][programName]",
+							"value": "Abiyum Naanum",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[1][startTimeInHour]",
+							"value": "2",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[1][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[1][endTimeInHour]",
+							"value": "3",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[1][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[1][hostedBy]",
+							"value": "Rj Abi",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[2][programName]",
+							"value": "Music Express",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[2][startTimeInHour]",
+							"value": "4",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[2][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[2][endTimeInHour]",
+							"value": "10",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[2][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[2][hostedBy]",
+							"value": "Chennai Radio",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[3][programName]",
+							"value": "Recharge Raaga",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[3][startTimeInHour]",
+							"value": "11",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[3][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[3][endTimeInHour]",
+							"value": "11",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[3][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[3][hostedBy]",
+							"value": "Chennai Radio",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[4][programName]",
+							"value": "Music Express",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[4][startTimeInHour]",
+							"value": "12",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[4][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[4][endTimeInHour]",
+							"value": "14",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[4][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[4][hostedBy]",
+							"value": "Chennai Radio",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[5][programName]",
+							"value": "Share Auto",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[5][startTimeInHour]",
+							"value": "15",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[5][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[5][endTimeInHour]",
+							"value": "15",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[5][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[5][hostedBy]",
+							"value": "RJ Angayarkanni",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[6][programName]",
+							"value": "Noisebook",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[6][startTimeInHour]",
+							"value": "16",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[6][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[6][endTimeInHour]",
+							"value": "18",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[6][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[6][hostedBy]",
+							"value": "RJ Divya",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[7][programName]",
+							"value": "Tentkottai",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[7][startTimeInHour]",
+							"value": "19",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[7][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[7][endTimeInHour]",
+							"value": "21",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[7][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[7][hostedBy]",
+							"value": "Chennai Radio",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[8][programName]",
+							"value": "Reeltime",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[8][startTimeInHour]",
+							"value": "22",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[8][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[8][endTimeInHour]",
+							"value": "22",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[8][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[8][hostedBy]",
+							"value": "Chennai Radio",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[9][programName]",
+							"value": "Share Auto",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[9][startTimeInHour]",
+							"value": "23",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[9][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[9][endTimeInHour]",
+							"value": "23",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[9][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[9][hostedBy]",
+							"value": "RJ Angayarkanni",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "dayPlayed",
+							"value": "2",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "url[0][1]",
+							"value": "",
+							"type": "text",
+							"enabled": false
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "ravi_latest.jpg"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "Abiyum_naanum-min.JPG"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "music_cover_art.png"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "music_cover_art.png"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "music_cover_art.png"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "Angayarkani-min (1).jpeg"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "rj_dhivya.jpg"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "music_cover_art.png"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "music_cover_art.png"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "Angayarkani-min (1).jpeg"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Wednesday- day light saving time copy",
+			"request": {
+				"url": "http://api.chennairadio.ca/rest/5813e1171818203b6b163374/schedule",
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "programs[0][programName]",
+							"value": "Vettaiyadu Vilayadu",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[0][startTimeInHour]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[0][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[0][endTimeInHour]",
+							"value": "1",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[0][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[0][hostedBy]",
+							"value": "Rj Venki",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[1][programName]",
+							"value": "Abiyum Naanum",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[1][startTimeInHour]",
+							"value": "2",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[1][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[1][endTimeInHour]",
+							"value": "3",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[1][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[1][hostedBy]",
+							"value": "Rj Abi",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[2][programName]",
+							"value": "Music Express",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[2][startTimeInHour]",
+							"value": "4",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[2][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[2][endTimeInHour]",
+							"value": "10",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[2][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[2][hostedBy]",
+							"value": "Chennai Radio",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[3][programName]",
+							"value": "Recharge Raaga",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[3][startTimeInHour]",
+							"value": "11",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[3][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[3][endTimeInHour]",
+							"value": "11",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[3][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[3][hostedBy]",
+							"value": "Chennai Radio",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[4][programName]",
+							"value": "Music Express",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[4][startTimeInHour]",
+							"value": "12",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[4][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[4][endTimeInHour]",
+							"value": "14",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[4][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[4][hostedBy]",
+							"value": "Chennai Radio",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[5][programName]",
+							"value": "Share Auto",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[5][startTimeInHour]",
+							"value": "15",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[5][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[5][endTimeInHour]",
+							"value": "15",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[5][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[5][hostedBy]",
+							"value": "RJ Angayarkanni",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[6][programName]",
+							"value": "Noisebook",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[6][startTimeInHour]",
+							"value": "16",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[6][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[6][endTimeInHour]",
+							"value": "18",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[6][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[6][hostedBy]",
+							"value": "RJ Divya",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[7][programName]",
+							"value": "Tentkottai",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[7][startTimeInHour]",
+							"value": "19",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[7][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[7][endTimeInHour]",
+							"value": "21",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[7][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[7][hostedBy]",
+							"value": "Chennai Radio",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[8][programName]",
+							"value": "Reeltime",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[8][startTimeInHour]",
+							"value": "22",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[8][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[8][endTimeInHour]",
+							"value": "22",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[8][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[8][hostedBy]",
+							"value": "Chennai Radio",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[9][programName]",
+							"value": "Share Auto",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[9][startTimeInHour]",
+							"value": "23",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[9][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[9][endTimeInHour]",
+							"value": "23",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[9][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[9][hostedBy]",
+							"value": "RJ Angayarkanni",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "dayPlayed",
+							"value": "3",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "url[0][1]",
+							"value": "",
+							"type": "text",
+							"enabled": false
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "venki_latest.jpg"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "Abiyum_naanum-min.JPG"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "music_cover_art.png"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "music_cover_art.png"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "music_cover_art.png"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "Angayarkani-min (1).jpeg"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "rj_dhivya.jpg"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "music_cover_art.png"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "music_cover_art.png"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "Angayarkani-min (1).jpeg"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Thursday- day light saving time-latest copy",
+			"request": {
+				"url": "http://api.chennairadio.ca/rest/5813e1171818203b6b163374/schedule",
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "programs[0][programName]",
+							"value": "Vettaiyadu Vilayadu",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[0][startTimeInHour]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[0][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[0][endTimeInHour]",
+							"value": "1",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[0][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[0][hostedBy]",
+							"value": "Rj Ravi",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[1][programName]",
+							"value": "Abiyum Naanum",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[1][startTimeInHour]",
+							"value": "2",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[1][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[1][endTimeInHour]",
+							"value": "3",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[1][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[1][hostedBy]",
+							"value": "Rj Abi",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[2][programName]",
+							"value": "Music Express",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[2][startTimeInHour]",
+							"value": "4",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[2][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[2][endTimeInHour]",
+							"value": "10",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[2][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[2][hostedBy]",
+							"value": "Chennai Radio",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[3][programName]",
+							"value": "Recharge Raaga",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[3][startTimeInHour]",
+							"value": "11",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[3][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[3][endTimeInHour]",
+							"value": "11",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[3][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[3][hostedBy]",
+							"value": "Chennai Radio",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[4][programName]",
+							"value": "Music Express",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[4][startTimeInHour]",
+							"value": "12",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[4][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[4][endTimeInHour]",
+							"value": "14",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[4][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[4][hostedBy]",
+							"value": "Chennai Radio",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[5][programName]",
+							"value": "Share Auto",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[5][startTimeInHour]",
+							"value": "15",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[5][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[5][endTimeInHour]",
+							"value": "15",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[5][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[5][hostedBy]",
+							"value": "RJ Angayarkanni",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[6][programName]",
+							"value": "Noisebook",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[6][startTimeInHour]",
+							"value": "16",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[6][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[6][endTimeInHour]",
+							"value": "18",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[6][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[6][hostedBy]",
+							"value": "RJ Divya",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[7][programName]",
+							"value": "Tentkottai",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[7][startTimeInHour]",
+							"value": "19",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[7][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[7][endTimeInHour]",
+							"value": "21",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[7][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[7][hostedBy]",
+							"value": "Chennai Radio",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[8][programName]",
+							"value": "Reeltime",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[8][startTimeInHour]",
+							"value": "22",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[8][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[8][endTimeInHour]",
+							"value": "22",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[8][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[8][hostedBy]",
+							"value": "Chennai Radio",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[9][programName]",
+							"value": "Share Auto",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[9][startTimeInHour]",
+							"value": "23",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[9][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[9][endTimeInHour]",
+							"value": "23",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[9][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[9][hostedBy]",
+							"value": "RJ Angayarkanni",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "dayPlayed",
+							"value": "4",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "url[0][1]",
+							"value": "",
+							"type": "text",
+							"enabled": false
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "ravi_latest.jpg"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "Abiyum_naanum-min.JPG"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "music_cover_art.png"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "music_cover_art.png"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "music_cover_art.png"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "Angayarkani-min (1).jpeg"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "rj_dhivya.jpg"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "music_cover_art.png"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "music_cover_art.png"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "Angayarkani-min (1).jpeg"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Friday - day light saving time latest",
+			"request": {
+				"url": "http://api.chennairadio.ca/rest/5813e1171818203b6b163374/schedule",
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "programs[0][programName]",
+							"value": "Vettaiyadu Vilayadu",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[0][startTimeInHour]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[0][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[0][endTimeInHour]",
+							"value": "1",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[0][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[0][hostedBy]",
+							"value": "Rj Preetha",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[1][programName]",
+							"value": "Abiyum Naanum",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[1][startTimeInHour]",
+							"value": "2",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[1][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[1][endTimeInHour]",
+							"value": "3",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[1][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[1][hostedBy]",
+							"value": "Rj Abi",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[2][programName]",
+							"value": "Music Express",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[2][startTimeInHour]",
+							"value": "4",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[2][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[2][endTimeInHour]",
+							"value": "10",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[2][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[2][hostedBy]",
+							"value": "Chennai Radio",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[3][programName]",
+							"value": "Recharge Raaga",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[3][startTimeInHour]",
+							"value": "11",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[3][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[3][endTimeInHour]",
+							"value": "11",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[3][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[3][hostedBy]",
+							"value": "Chennai Radio",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[4][programName]",
+							"value": "Music Express",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[4][startTimeInHour]",
+							"value": "12",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[4][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[4][endTimeInHour]",
+							"value": "14",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[4][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[4][hostedBy]",
+							"value": "Chennai Radio",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[5][programName]",
+							"value": "Share Auto",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[5][startTimeInHour]",
+							"value": "15",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[5][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[5][endTimeInHour]",
+							"value": "15",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[5][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[5][hostedBy]",
+							"value": "RJ Angayarkanni",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[6][programName]",
+							"value": "Noisebook",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[6][startTimeInHour]",
+							"value": "16",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[6][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[6][endTimeInHour]",
+							"value": "18",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[6][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[6][hostedBy]",
+							"value": "RJ Divya",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[7][programName]",
+							"value": "Tentkottai",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[7][startTimeInHour]",
+							"value": "19",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[7][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[7][endTimeInHour]",
+							"value": "21",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[7][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[7][hostedBy]",
+							"value": "Chennai Radio",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[8][programName]",
+							"value": "Reeltime",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[8][startTimeInHour]",
+							"value": "22",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[8][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[8][endTimeInHour]",
+							"value": "22",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[8][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[8][hostedBy]",
+							"value": "Chennai Radio",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[9][programName]",
+							"value": "Share Auto",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[9][startTimeInHour]",
+							"value": "23",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[9][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[9][endTimeInHour]",
+							"value": "23",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[9][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[9][hostedBy]",
+							"value": "RJ Angayarkanni",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "dayPlayed",
+							"value": "5",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "url[0][1]",
+							"value": "",
+							"type": "text",
+							"enabled": false
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "preetha.jpg"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "Abiyum_naanum-min.JPG"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "music_cover_art.png"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "music_cover_art.png"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "music_cover_art.png"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "Angayarkani-min (1).jpeg"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "rj_dhivya.jpg"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "music_cover_art.png"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "music_cover_art.png"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "Angayarkani-min (1).jpeg"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "saturday schedule copy",
+			"request": {
+				"url": "http://api.chennairadio.ca/rest/5813e1171818203b6b163374/schedule",
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "programs[0][programName]",
+							"value": "Vettaiyadu Vilayadu",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[0][startTimeInHour]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[0][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[0][endTimeInHour]",
+							"value": "1",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[0][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[0][hostedBy]",
+							"value": "Rj Venki",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[1][programName]",
+							"value": "Abiyum Naanum",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[1][startTimeInHour]",
+							"value": "2",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[1][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[1][endTimeInHour]",
+							"value": "3",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[1][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[1][hostedBy]",
+							"value": "Rj Abi",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[2][programName]",
+							"value": "Juke Box",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[2][startTimeInHour]",
+							"value": "4",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[2][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[2][endTimeInHour]",
+							"value": "10",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[2][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[2][hostedBy]",
+							"value": "Chennai Radio",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[3][programName]",
+							"value": "Recharge Raaga",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[3][startTimeInHour]",
+							"value": "11",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[3][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[3][endTimeInHour]",
+							"value": "11",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[3][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[3][hostedBy]",
+							"value": "Chennai Radio",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[4][programName]",
+							"value": "Music Express",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[4][startTimeInHour]",
+							"value": "12",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[4][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[4][endTimeInHour]",
+							"value": "13",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[4][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[4][hostedBy]",
+							"value": "Chennai Radio",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[5][programName]",
+							"value": "Whatsapp Wishes",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[5][startTimeInHour]",
+							"value": "14",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[5][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[5][endTimeInHour]",
+							"value": "15",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[5][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[5][hostedBy]",
+							"value": "Chennai Radio",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[6][programName]",
+							"value": "Arattai",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[6][startTimeInHour]",
+							"value": "16",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[6][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[6][endTimeInHour]",
+							"value": "17",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[6][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[6][hostedBy]",
+							"value": "RJ Divya",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[7][programName]",
+							"value": "Mangatha",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[7][startTimeInHour]",
+							"value": "18",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[7][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[7][endTimeInHour]",
+							"value": "19",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[7][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[7][hostedBy]",
+							"value": "Rj Harish & Rj Divya",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[8][programName]",
+							"value": "Tentkottai",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[8][startTimeInHour]",
+							"value": "20",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[8][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[8][endTimeInHour]",
+							"value": "21",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[8][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[8][hostedBy]",
+							"value": "Chennai Radio",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[9][programName]",
+							"value": "Music Express",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[9][startTimeInHour]",
+							"value": "22",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[9][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[9][endTimeInHour]",
+							"value": "23",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[9][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[9][hostedBy]",
+							"value": "Chennai Radio",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "dayPlayed",
+							"value": "6",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "url[0][1]",
+							"value": "",
+							"type": "text",
+							"enabled": false
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"warning": "",
+							"src": "venki_latest.jpg"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"warning": "",
+							"src": "Abiyum_naanum-min.JPG"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"warning": "",
+							"src": "music_cover_art.png"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"warning": "",
+							"src": "music_cover_art.png"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"warning": "",
+							"src": "music_cover_art.png"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"warning": "",
+							"src": "music_cover_art.png"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"warning": "",
+							"src": "rj_dhivya.jpg"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"warning": "",
+							"src": "harish & dhivya.jpg"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"warning": "",
+							"src": "music_cover_art.png"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "music_cover_art.png"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Weekday Schedule copy",
+			"request": {
+				"url": "http://api.chennairadio.ca/rest/5813e1171818203b6b163374/schedule",
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "programs[0][programName]",
+							"value": "Vettaiyadu Vilayadu",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[0][startTimeInHour]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[0][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[0][endTimeInHour]",
+							"value": "1",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[0][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[0][hostedBy]",
+							"value": "Chennai Radio",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[1][programName]",
+							"value": "Abiyum Naanum",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[1][startTimeInHour]",
+							"value": "2",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[1][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[1][endTimeInHour]",
+							"value": "4",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[1][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[1][hostedBy]",
+							"value": "Rj Abi",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[2][programName]",
+							"value": "Music Express",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[2][startTimeInHour]",
+							"value": "5",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[2][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[2][endTimeInHour]",
+							"value": "10",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[2][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[2][hostedBy]",
+							"value": "Chennai Radio",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[3][programName]",
+							"value": "Recharge Raaga",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[3][startTimeInHour]",
+							"value": "11",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[3][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[3][endTimeInHour]",
+							"value": "11",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[3][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[3][hostedBy]",
+							"value": "Chennai Radio",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[4][programName]",
+							"value": "Music Express",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[4][startTimeInHour]",
+							"value": "12",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[4][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[4][endTimeInHour]",
+							"value": "15",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[4][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[4][hostedBy]",
+							"value": "Chennai Radio",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[5][programName]",
+							"value": "Noisebook",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[5][startTimeInHour]",
+							"value": "16",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[5][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[5][endTimeInHour]",
+							"value": "18",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[5][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[5][hostedBy]",
+							"value": "RJ Divya",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[6][programName]",
+							"value": "Tentkottai",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[6][startTimeInHour]",
+							"value": "19",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[6][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[6][endTimeInHour]",
+							"value": "21",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[6][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[6][hostedBy]",
+							"value": "Chennai Radio",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[7][programName]",
+							"value": "Reeltime",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[7][startTimeInHour]",
+							"value": "22",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[7][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[7][endTimeInHour]",
+							"value": "23",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[7][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[7][hostedBy]",
+							"value": "Chennai Radio",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "dayPlayed",
+							"value": "5",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "url[0][1]",
+							"value": "",
+							"type": "text",
+							"enabled": false
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "music_cover_art.png"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "music_cover_art.png"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "music_cover_art.png"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "music_cover_art.png"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "rj_dhivya.jpg"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "music_cover_art.png"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"src": "music_cover_art.png"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": false,
+							"src": "music_cover_art.png"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": false,
+							"src": "Rj_Munna.png"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "sunday schedule copy",
+			"request": {
+				"url": "http://api.chennairadio.ca/rest/5813e1171818203b6b163374/schedule",
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "programs[0][programName]",
+							"value": "Music Express",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[0][startTimeInHour]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[0][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[0][endTimeInHour]",
+							"value": "10",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[0][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[0][hostedBy]",
+							"value": "Chennai Radio",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[1][programName]",
+							"value": "Recharge Raaga",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[1][startTimeInHour]",
+							"value": "11",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[1][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[1][endTimeInHour]",
+							"value": "11",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[1][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[1][hostedBy]",
+							"value": "Chennai Radio",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[2][programName]",
+							"value": "Music Express",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[2][startTimeInHour]",
+							"value": "12",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[2][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[2][endTimeInHour]",
+							"value": "13",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[2][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[2][hostedBy]",
+							"value": "Chennai Radio",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[3][programName]",
+							"value": "Whatsapp Wishes",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[3][startTimeInHour]",
+							"value": "14",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[3][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[3][endTimeInHour]",
+							"value": "15",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[3][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[3][hostedBy]",
+							"value": "Chennai Radio",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[4][programName]",
+							"value": "Arattai with Harish",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[4][startTimeInHour]",
+							"value": "16",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[4][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[4][endTimeInHour]",
+							"value": "17",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[4][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[4][hostedBy]",
+							"value": "Rj Harish",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[5][programName]",
+							"value": "Mangatha",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[5][startTimeInHour]",
+							"value": "18",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[5][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[5][endTimeInHour]",
+							"value": "19",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[5][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[5][hostedBy]",
+							"value": "Rj Harish and Rj Divya",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[6][programName]",
+							"value": "Tentkottai",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[6][startTimeInHour]",
+							"value": "20",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[6][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[6][endTimeInHour]",
+							"value": "21",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[6][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[6][hostedBy]",
+							"value": "Chennai radio",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[7][programName]",
+							"value": "Music Express",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[7][startTimeInHour]",
+							"value": "22",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[7][startTimeInMinutes]",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[7][endTimeInHour]",
+							"value": "23",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[7][endTimeInMinutes]",
+							"value": "59",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "programs[7][hostedBy]",
+							"value": "Chennai radio",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "dayPlayed",
+							"value": "0",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "url[0][1]",
+							"value": "",
+							"type": "text",
+							"enabled": false
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"warning": "",
+							"src": "music_cover_art.png"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"warning": "",
+							"src": "music_cover_art.png"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"warning": "",
+							"src": "music_cover_art.png"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"warning": "",
+							"src": "music_cover_art.png"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"warning": "",
+							"src": "rj_harish.jpg"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"warning": "",
+							"src": "harish & dhivya.jpg"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"warning": "",
+							"src": "music_cover_art.png"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": true,
+							"warning": "",
+							"src": "music_cover_art.png"
+						},
+						{
+							"key": "artistImgs",
+							"type": "file",
+							"enabled": false,
+							"warning": "",
+							"src": "rj_veera.jpg"
+						}
+					]
 				},
 				"description": ""
 			},
