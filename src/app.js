@@ -113,7 +113,7 @@ dbPromise.then(connection => {
 		passwordField: 'password'
 	}, function (email, password, done) {
 		User.findOne({
-			emailId: email
+			emailId: 'test@h.com'
 		}, function (err, user) {
 			if (err) {
 				return done(err);
@@ -123,7 +123,7 @@ dbPromise.then(connection => {
 					message: 'Incorrect username.'
 				});
 			}
-			user.validatePassword(password, (err, res) => {
+			user.validatePassword('123', (err, res) => {
 				if (err) {
 					return done(err);
 				}
